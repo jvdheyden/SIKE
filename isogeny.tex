@@ -1,0 +1,101 @@
+\documentclass{beamer}
+%TODO:
+
+%indentation?
+
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+\mode<presentation>
+{
+  \usetheme{default}      % or try Darmstadt, Madrid, Warsaw, AISEC ...
+  \usecolortheme{default} % or try albatross, beaver, crane, ...
+  \usefonttheme{default}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+} 
+
+%\usepackage{fhgfont} funktioniert leider noch nicht
+\usepackage[font=footnotesize]{caption} %for attributing pictures
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{braket} % dirac notation
+\usepackage{amsmath} % math symbols
+\usepackage{amssymb} % other symbols
+\graphicspath{ {img/} }
+\usepackage{svg} %insert svg
+\usepackage{svg-extract} %insert svg
+\usepackage{graphicx} % insert pdfs
+\newenvironment{rcases} % for right braces
+{\left.\begin{aligned}}
+	{\end{aligned}\right\rbrace}
+
+\title[Shor's Algorithm]{SIKE - Supersingular Isogeny Key Encapsulation}
+\author{Jonas von der Heyden}
+\institute{FU Berlin}
+\date{4.6.19}
+
+\begin{document}
+\newcommand{\source}[1]{\caption*{Source: {#1}} } %for attributing pictures
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Uncomment these lines for an automatically generated outline.
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}{Introduction}
+
+	\begin{itemize}
+  		\item Goal of this presentation: Give a high-level overview of Shor's algorithm
+	\end{itemize}
+
+\end{frame}
+
+\section{Mathematical primitive}
+
+\subsection{Elliptic Curves}
+
+\begin{frame}{Elliptic curves}
+	%Weierstrass, Graphs
+	content
+\end{frame}
+
+\begin{frame}{Elliptic Curve as Abelian Groups (G,+)}
+	%...
+	content
+\end{frame}
+
+\subsection{Isogenies}
+\begin{frame}{Group homomorphisms}
+	Example: $\phi: \mathbb{Z}\to\mathbb{Z}/3\mathbb{Z}$ is surjective and it's kernel consists of all elements in $\mathbb{Z}$ divisible by 3
+\end{frame}
+
+\subsection{m-torsion groups}
+\subsection{Isogeny graphs}
+
+\section{Cryptosystem}
+
+\subsection{Diffie-Hellman}
+\subsection{Diffie-Hellman as random walk}
+\subsection{SIKE as random walk in Ramanujan graph}
+\subsection{SIKE protocol}
+
+\section{Areas of use}
+
+\section{Security \& Complexity}
+\subsection{SSDH assumption}
+\subsection{Canetti Crawcyzk}
+
+\section{Discussion}
+\begin{frame}{Questions?}
+...
+\end{frame}
+
+\end{document}
