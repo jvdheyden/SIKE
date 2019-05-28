@@ -97,7 +97,9 @@ What is an elliptic curve?
 		\item $P + Q = Q + P$ (Commutative)
 	\end{enumerate}
 	%Elliptic curve addition algorithm? (Theorem 6.6)
+	%j-invariant
 \end{frame}
+
 
 \begin{frame}{Elliptic Curves over finite fields}
 	\begin{itemize}
@@ -105,8 +107,10 @@ What is an elliptic curve?
 		\item The set of points of E with coordinates in $\mathbb{F}_p$ is the set $E(\mathbb{F}_p)=\{(x,y):x,y\in \mathbb{F}_p$ satisfy $y^2=x^3+Ax+B \} \cup \{\mathcal{O}\}$
 		\item Elliptic curve addition algorithm continues to work in $E(\mathbb{F}_p)$
 		\item Addition law continues to satisfy properties of Abelian Groups
-		\item In fact, $E(\mathbb{F}_p)$ is a finite group
+		\item If \#X is the cardinality of a set X, then \#$E(\mathbb{F}_q) = q+1-t$ for $|t|\leq 2\sqrt{q}$
+		\item An elliptic curve $E(\mathbb{F}_q)$ is called \textit{supersingular} if $p \mid t$ where $q=p^a$
 	\end{itemize}
+	%TODO: Beispiel!
 \end{frame}
 
 \begin{frame}{ECDLP}
@@ -124,29 +128,57 @@ A point $P\in E$ satisfying $mP=\mathcal{O}$ is called a point of order m in the
 
 \subsection{Isogenies}
 \begin{frame}{Group homomorphisms}
-	Example: $\phi: \mathbb{Z}\to\mathbb{Z}/3\mathbb{Z}$ is surjective and it's kernel consists of all elements in $\mathbb{Z}$ divisible by 3
+Properties of group homomorphisms:
+\begin{itemize}
+	\item Given 2 groups (G,+), (H,$\oplus$) a group homomorphism is a function $\phi: G \to H$ such that $\phi(u + v) = \phi(u) \oplus \phi(v)$ 
+	\item $\phi(e_G) = e_H$ where $e_G$ and $e_H$ are the identity elements of G and H
+	\item The kernel of $\phi$ is the set of elements in $G$ which are mapped to the identity in $H$:
+	$ker(\phi) \equiv \{u\in G:\phi(u)=e_H\}$
+\end{itemize}
+	 
 	
 	%Schaubild an Tafel
-	\begin{block}{Properties of group homomorphisms}
+	\begin{block}{Example}
+		$\phi: \mathbb{Z}\to\mathbb{Z}/3\mathbb{Z}$ is surjective and it's kernel consists of all elements in $\mathbb{Z}$ divisible by 3
 		
-		\begin{itemize}
-			\item Given 2 groups (G,+), (H,$\oplus$) a group homomorphism is a function $\phi: G \to H$ such that $\phi(u + v) = \phi(u) \oplus \phi(v)$ 
-			\item $\phi(e_G) = e_H$ where $e_G$ and $e_H$ are the identity elements of G and H
-			\item The kernel of $\phi$ is the set of elements in $G$ which are mapped to the identity in $H$:
-			$ker(\phi) \equiv \{u\in G:\phi(u)=e_H\}$
-		\end{itemize}
+		
 	\end{block}
 \end{frame}
 \begin{frame}{Types of Homorphisms}
 	\begin{itemize}
 		\item Isomorphism: A group homomorphism that is bijective % Schaubild Graphisomorphie
 		\item Endomorphism: A group homomorphism $\phi: G \to G$
-		\item Isogeny: A group homomorphism over elliptic curves $\phi : E_1 \to E_2$ such that $\phi(0_{E_1}) = 0_{E_2}$ where $0_{E_1},0_{E_2}$ are the respective identity elements
+		\item Isogeny: A surjective group homomorphism $\phi : G \to H$ with a finite kernel
 	\end{itemize}
 
-\begin{block}{Isogenies}
-	Any 2 elliptic curves $E_1,E_2$ over $\mathbb{F}_q$ are isogenous iff $\#E_1(\mathbb{F}_q) = \#E_2(\mathbb{F}_q)$ ($E_1$ and $E_2$ have the same number of points). What about the kernel?
+\begin{block}{Isogeny Example}
+	Multiplication map $[n]: E \to E$ defined by $[n]P = P + P + ...+ P$ ($n$ times):
+	\begin{itemize}
+		\item Maps 0 to itself and is surjective
+		\item $ker[n] = E[n]$, therefore kernel is finite (if elliptic curve is defined over $\mathbb{C},\mathbb{R},\mathbb{Q}$ or $\mathbb{F}_p$)
+		\item Isogeny [n] can be calculated with elliptic curve addition algorithm %Beispiel an Tafel?
+		
+	\end{itemize}
+%	Any 2 elliptic curves $E_1,E_2$ over $\mathbb{F}_q$ are isogenous iff $\#E_1(\mathbb{F}_q) = \#E_2(\mathbb{F}_q)$ ($E_1$ and $E_2$ have the same number of points). What about the kernel?
 \end{block}
+
+\end{frame}
+
+\begin{frame}{Isogenies of elliptic curves}
+Let $E_1,E_2$ be 2 elliptic curves over $\mathbb{F}_q$. Then an isogeny is a morphism $\phi: E_1 \to E_2$ s.t.:
+\begin{itemize}
+	\item $\phi(0_{E_1})= 0_{E_2}$
+	\item $\#E_1(\mathbb{F}_q) = \#E_2(\mathbb{F}_q)$
+	\item there exists a dual isogeny $\hat{\phi}: E_2 \to E_1$
+	\item it is uniquely defined by it's kernel $ker(\phi)$. Because a kernel is also a finite subgroup G of $E_1$ we can also say that $E_2$ is $E_1/G$
+\end{itemize}
+\begin{block}{Example}
+	% Example 3 aus Galbraith
+\end{block}
+
+\end{frame}
+\begin{frame}{Supersingular elliptic curves}
+% galbraith buch p.189
 
 \end{frame}
 
@@ -158,6 +190,10 @@ A point $P\in E$ satisfying $mP=\mathcal{O}$ is called a point of order m in the
 \subsection{Diffie-Hellman as random walk}
 \subsection{SIKE as random walk in Ramanujan graph}
 \subsection{SIKE protocol}
+
+\begin{frame}{Composition chains of isogenies}
+	% help to make computation of isogenies cheap: see Galbraith p.5
+\end{frame}
 
 \section{Areas of use}
 
