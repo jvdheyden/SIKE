@@ -1,6 +1,8 @@
 \documentclass{beamer}
 %TODO:
-%understand why we have kernel if elliptic curves with the same number of points are isogenous
+%warum müssen wir supersingular curves benutzen?
+%j-invariants
+% wozu brauchen wir ramanujan graphs?
 
 % Choose how your presentation looks.
 %
@@ -9,7 +11,7 @@
 %
 \mode<presentation>
 {
-  \usetheme{default}      % or try Darmstadt, Madrid, Warsaw, AISEC ...
+  \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, AISEC ...
   \usecolortheme{default} % or try albatross, beaver, crane, ...
   \usefonttheme{default}  % or try serif, structurebold, ...
   \setbeamertemplate{navigation symbols}{}
@@ -62,32 +64,104 @@
 \subsection{Elliptic Curves}
 
 \begin{frame}{Elliptic curves}
-	What is an elliptic curve?
-	% image of elliptic curve
+	Which figure is \textit{not} an elliptic curve?
+	\begin{figure}
+		\begin{minipage}{0.48\textwidth}
+			\centering
+			\includegraphics[width=.7\linewidth]{ellipse}
+			\label{fig:ellipse}
+		\end{minipage}\hfill
+		\begin{minipage}{0.48\textwidth}
+			\centering
+			\includegraphics[width=.7\linewidth]{elliptic_curve}
+			\label{fig:elliptic_curve}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\includegraphics[width=.7\linewidth]{elliptic_curve_c}
+		\label{fig:elliptic_curve_c}
+	\end{minipage}\hfill
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\includegraphics[width=.7\linewidth]{elliptic_curve_fp}
+		\label{fig:elliptic_curve_fp]}
+	\end{minipage}
+\end{figure}
+
+
 	% image of ellipse
 \end{frame}
 
 \begin{frame}{Elliptic curves}
-What is an elliptic curve?
-% image of elliptic curve with checkmark
-% image of ellipse
+	Which figure is \textit{not} an elliptic curve?
+\begin{figure}
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\includegraphics[width=.7\linewidth]{ellipse}
+		\caption{Ellipse}\label{fig:ellipse}
+	\end{minipage}\hfill
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\includegraphics[width=.7\linewidth]{elliptic_curve}
+		\caption{Elliptic Curve over $\mathbb{R}$}\label{fig:elliptic_curve}
+	\end{minipage}
+\end{figure}
+\begin{figure}
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\includegraphics[width=.7\linewidth]{elliptic_curve_c}
+		\caption{Elliptic Curve over $\mathbb{C}$}\label{fig:elliptic_curve_c}
+	\end{minipage}\hfill
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\includegraphics[width=.7\linewidth]{elliptic_curve_fp}
+		\caption{Elliptic Curve over $\mathbb{F}_p$}\label{fig:elliptic_curve_fp]}
+	\end{minipage}
+\end{figure}
 
 \end{frame}
 \begin{frame}{Elliptic curves}
 What is an elliptic curve?
-% image of elliptic curve with checkmark
-% image of ellipse
-\begin{block}{Weierstrass Equations}
-	An elliptic curve is the set of solutions to a \textit{Weierstrass equation} of the form $Y^2=X^3+AX+B$.
-\end{block}
+\begin{itemize}
+	\item Historically, elliptic curves were used to calculate the circumference of an ellipse
+	\item An elliptic curve is the set of solutions to a \textit{Weierstrass equation} of the form $Y^2=X^3+AX+B$
+\end{itemize}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=.7\linewidth]{elliptic_curve}
+	\label{fig:elliptic_curve}
+\end{figure}
+	
 \end{frame}
 
 \begin{frame}{Abelian Groups (G,+) over Elliptic Curves}
-	% Picture of P+Q
-	% Picture of P+P
-	% Picture of P-P
-\end{frame}
+\begin{figure}
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{P+Q}
+		\caption{P+Q}\label{fig:p+q}
+	\end{minipage}\hfill
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{P+P}
+		\caption{P+P}\label{fig:p+p}
+	\end{minipage}
+\end{figure}
 
+\end{frame}
+\begin{frame}{Abelian Groups (G,+) over Elliptic Curves}
+\begin{figure}
+
+		\centering
+		\includegraphics[width=1\linewidth]{P-P}
+		\caption{P-P}\label{fig:p-p}
+
+
+\end{figure}
+\end{frame}
 \begin{frame}{Abelian Groups (G,+) over Elliptic Curves}
 	Let E be an elliptic curve. Then the addition law on E has the following properties:
 	\begin{enumerate}
@@ -96,8 +170,28 @@ What is an elliptic curve?
 		\item $(P + Q) + R = P + (Q + R) $ (Associative)
 		\item $P + Q = Q + P$ (Commutative)
 	\end{enumerate}
-	%Elliptic curve addition algorithm? (Theorem 6.6)
-	%j-invariant
+
+\end{frame}
+
+\begin{frame}{Elliptic Curve addition algorithm}
+	Let $E : Y^2 = X^3 + AX + B$ be an elliptic curve and let $P_1$ and $P_2$ be points on E.
+	\begin{enumerate}
+		\item If $P_1 = \mathcal{O}$, then $P_1 + P_2 = P_2$\pause
+		\item Otherwise, if $P_2=\mathcal{O}$, then $P_1 + P_2 = P_1$\pause
+		\item Otherwise, write $P_1 = (x_1,y_1)$ and $P_1 = (x_2,y_2)$\pause
+		\item If $x_1 = x_2$ and $y_1=-y_2$, then $P_1+P_2=\mathcal{O}$\pause
+		\item Otherwise, define \\
+		\qquad \qquad \qquad$\lambda =
+		\begin{cases}
+			\frac{y_2-y_1}{x_2-x_1}\text{\quad if }P_1 \neq P_2\\\pause
+			\\
+			\frac{3x_1^2 +A}{2y_1}\text{\quad if }P_1=P_2 \pause
+		\end{cases}$\\
+		\vspace{5mm}
+		and let $x_3=\lambda^2-x_1-x_2$  \hfill and $y_3=\lambda(x_1-x_3)-y_1$.\\
+		\vfill
+		Then $P_1+P_2=(x_3,y_3)$.
+	\end{enumerate}
 \end{frame}
 
 
@@ -109,8 +203,10 @@ What is an elliptic curve?
 		\item Addition law continues to satisfy properties of Abelian Groups
 		\item If \#X is the cardinality of a set X, then \#$E(\mathbb{F}_q) = q+1-t$ for $|t|\leq 2\sqrt{q}$
 		\item An elliptic curve $E(\mathbb{F}_q)$ is called \textit{supersingular} if $p \mid t$ where $q=p^a$
+		\item It follows for all supersingular curves: $\#E(\mathbb{F}_q^n)\equiv 1 \bmod p$ for all $n\in \mathbb{N}$ and $p>3$
 	\end{itemize}
-	%TODO: Beispiel!
+	%TODO: (1)Beispiel!, (2) Konsequenz aus letztem Punkt
+	
 \end{frame}
 
 \begin{frame}{ECDLP}
@@ -119,11 +215,12 @@ What is an elliptic curve?
 \subsection{Points of finite order}
 
 \begin{frame}{Points of finite order}
-A point $P\in E$ satisfying $mP=\mathcal{O}$ is called a point of order m in the group E.
-
-\begin{block}{Torsion points}
-	$E[m] = \{P\in E: mP = \mathcal{O}\}$
-\end{block}
+\begin{itemize}
+	\item A point $P\in E$ satisfying $mP=\mathcal{O}$ is called a point of order m in the group E
+	\item $E[m] = \{P\in E: mP = \mathcal{O}\}$ is also called the m-torsion group of E and includes all points of order $m$ in $E$
+	\item $E[m] = \langle P \rangle $ is a subgroup of E since if $P,Q\in E[m]$ then also $P+Q$ and $-P$
+\end{itemize}
+ 	
 \end{frame}
 
 \subsection{Isogenies}
@@ -148,14 +245,14 @@ Properties of group homomorphisms:
 	\begin{itemize}
 		\item Isomorphism: A group homomorphism that is bijective % Schaubild Graphisomorphie
 		\item Endomorphism: A group homomorphism $\phi: G \to G$
-		\item Isogeny: A surjective group homomorphism $\phi : G \to H$ with a finite kernel
+		\item Isogeny: A group homomorphism $\phi : G \to H$ with a finite kernel
 	\end{itemize}
 
 \begin{block}{Isogeny Example}
 	Multiplication map $[n]: E \to E$ defined by $[n]P = P + P + ...+ P$ ($n$ times):
 	\begin{itemize}
 		\item Maps 0 to itself and is surjective
-		\item $ker[n] = E[n]$, therefore kernel is finite (if elliptic curve is defined over $\mathbb{C},\mathbb{R},\mathbb{Q}$ or $\mathbb{F}_p$)
+		\item $ker[n] = E[n]$, therefore kernel is finite (if elliptic curve is defined over $\mathbb{F}_p$)
 		\item Isogeny [n] can be calculated with elliptic curve addition algorithm %Beispiel an Tafel?
 		
 	\end{itemize}
@@ -170,22 +267,64 @@ Let $E_1,E_2$ be 2 elliptic curves over $\mathbb{F}_q$. Then an isogeny is a mor
 	\item $\phi(0_{E_1})= 0_{E_2}$
 	\item $\#E_1(\mathbb{F}_q) = \#E_2(\mathbb{F}_q)$
 	\item there exists a dual isogeny $\hat{\phi}: E_2 \to E_1$
-	\item it is uniquely defined by it's kernel $ker(\phi)$. Because a kernel is also a finite subgroup G of $E_1$ we can also say that $E_2$ is $E_1/G$
+	\item up to isomorphism it is uniquely defined by it's kernel $ker(\phi)$. Because a kernel is also a finite subgroup G of $E_1$ we can also say that $E_2$ is $E_1/G$
+	\item equivalently it is also uniquely defined up to isomorphism by it's j-invariant $j(E)=1728\frac{4A^3}{4A^3+27B^2}$
+	%how does j-invariant work?
 \end{itemize}
 \begin{block}{Example}
 	% Example 3 aus Galbraith
 \end{block}
 
 \end{frame}
-\begin{frame}{Supersingular elliptic curves}
-% galbraith buch p.189
+\begin{frame}{Endomorphism ring}
+
 
 \end{frame}
 
+\begin{frame}{Computing isogenies}
+% galbraith p.6
+\end{frame}
 
 \section{Cryptosystem}
 
 \subsection{SIKE protocol}
+
+\begin{frame}{The SIKE protocol: Main idea}
+Idea: Create Diffie-Hellman exchange over isogenies of elliptic curves. %DLDH an Tafel zeichnen
+\begin{figure}
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{DLDH}
+		\caption{Discrete Logarithm Diffie-Hellman}\label{fig:dldh}
+	\end{minipage}\hfill
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{SIDH}
+		\caption{Supersingular Isogeny Diffie-Hellman}\label{fig:sidh}
+	\end{minipage}
+\end{figure}
+
+\end{frame}
+\begin{frame}{DH over isogenies of ordinary elliptic curves}
+
+\end{frame}
+
+\begin{frame}{The SIKE protocol: Walk-through}
+\begin{enumerate}
+	\item Generate Public Parameters:
+	\begin{enumerate}
+		\item Choose $2^{e_A},3^{e_B}$, search for a prime $p=2^{e_A}3^{e_B}f\pm 1$ and compute $q=p^2$
+		\item Construct elliptic curve $E$ over $\mathbb{F}_q$ of cardinality $(2^{e_A}3^{e_B}f)^2$ %wie geht das?
+		\item Find bases $P_A,Q_A$ and $P_B,Q_B$ that generate $E[2^{e_A}]$ and $E[3^{e_B}]$ respectively, s.t. $\langle P_A,Q_A\rangle$ = $E[2^{e_A}]$ and $\langle P_B,Q_B\rangle$ = $E[3^{e_B}]$ %wie schwierig ist das?
+	\end{enumerate}
+\end{enumerate}
+\end{frame}
+%TODO: visualization
+
+\begin{frame}{Correctness}
+
+\end{frame}
+
 \subsection{Efficiency}
 
 \begin{frame}{Composition chains of isogenies}
@@ -199,6 +338,14 @@ Let $E_1,E_2$ be 2 elliptic curves over $\mathbb{F}_q$. Then an isogeny is a mor
 
 
 \section{Discussion}
+
+\begin{frame}{Open questions}
+\begin{itemize}
+	\item Why do cryptosystem designers always choose extremly complicated problems that are not even NP-complete?
+	\item Why not choose one of more than 1000 NP-complete problems? By definition they have a solution that is easy to verify but hard to compute.
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Questions?}
 ...
 \end{frame}
