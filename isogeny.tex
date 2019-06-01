@@ -19,6 +19,7 @@
 } 
 
 %\usepackage{fhgfont} funktioniert leider noch nicht
+\usepackage[shortlabels]{enumitem} % counter styles for enumerations
 \usepackage[font=footnotesize]{caption} %for attributing pictures
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
@@ -124,7 +125,7 @@
 \end{frame}
 \begin{frame}{Elliptic curves}
 What is an elliptic curve?
-\begin{itemize}
+\begin{itemize}[\textbullet]
 	\item Historically, elliptic curves were used to calculate the circumference of an ellipse
 	\item An elliptic curve is the set of solutions to a \textit{Weierstrass equation} of the form $Y^2=X^3+AX+B$
 \end{itemize}
@@ -164,7 +165,7 @@ What is an elliptic curve?
 \end{frame}
 \begin{frame}{Abelian Groups (G,+) over Elliptic Curves}
 	Let E be an elliptic curve. Then the addition law on E has the following properties:
-	\begin{enumerate}
+	\begin{enumerate}[1.]
 		\item $P + \mathcal{O} = \mathcal{O} + P$ (Identity)
 		\item $P + (-P) = \mathcal{O}$ (Inverse)
 		\item $(P + Q) + R = P + (Q + R) $ (Associative)
@@ -175,7 +176,7 @@ What is an elliptic curve?
 
 \begin{frame}{Elliptic Curve addition algorithm}
 	Let $E : Y^2 = X^3 + AX + B$ be an elliptic curve and let $P_1$ and $P_2$ be points on E.
-	\begin{enumerate}
+	\begin{enumerate}[1.]
 		\item If $P_1 = \mathcal{O}$, then $P_1 + P_2 = P_2$\pause
 		\item Otherwise, if $P_2=\mathcal{O}$, then $P_1 + P_2 = P_1$\pause
 		\item Otherwise, write $P_1 = (x_1,y_1)$ and $P_1 = (x_2,y_2)$\pause
@@ -196,7 +197,7 @@ What is an elliptic curve?
 
 
 \begin{frame}{Elliptic Curves over finite fields}
-	\begin{itemize}
+	\begin{itemize}[\textbullet]
 		\item An elliptic curve over $\mathbb{F}_p$ is an equation of the form $E:Y^2=X^3+AX+B$
 		\item The set of points of E with coordinates in $\mathbb{F}_p$ is the set $E(\mathbb{F}_p)=\{(x,y):x,y\in \mathbb{F}_p$ satisfy $y^2=x^3+Ax+B \} \cup \{\mathcal{O}\}$
 		\item Elliptic curve addition algorithm continues to work in $E(\mathbb{F}_p)$
@@ -215,10 +216,10 @@ What is an elliptic curve?
 \subsection{Points of finite order}
 
 \begin{frame}{Points of finite order}
-\begin{itemize}
+\begin{itemize}[\textbullet]
 	\item A point $P\in E$ satisfying $mP=\mathcal{O}$ is called a point of order m in the group E
 	\item $E[m] = \{P\in E: mP = \mathcal{O}\}$ is also called the m-torsion group of E and includes all points of order $m$ in $E$
-	\item $E[m] = \langle P \rangle $ is a subgroup of E since if $P,Q\in E[m]$ then also $P+Q$ and $-P$
+	\item $E[m] $ is a subgroup of E since if $P,Q\in E[m]$ then also $P+Q$ and $-P$
 \end{itemize}
  	
 \end{frame}
@@ -226,7 +227,7 @@ What is an elliptic curve?
 \subsection{Isogenies}
 \begin{frame}{Group homomorphisms}
 Properties of group homomorphisms:
-\begin{itemize}
+\begin{itemize}[\textbullet]
 	\item Given 2 groups (G,+), (H,$\oplus$) a group homomorphism is a function $\phi: G \to H$ such that $\phi(u + v) = \phi(u) \oplus \phi(v)$ 
 	\item $\phi(e_G) = e_H$ where $e_G$ and $e_H$ are the identity elements of G and H
 	\item The kernel of $\phi$ is the set of elements in $G$ which are mapped to the identity in $H$:
@@ -242,7 +243,7 @@ Properties of group homomorphisms:
 	\end{block}
 \end{frame}
 \begin{frame}{Types of Homorphisms}
-	\begin{itemize}
+	\begin{itemize}[\textbullet]
 		\item Isomorphism: A group homomorphism that is bijective % Schaubild Graphisomorphie
 		\item Endomorphism: A group homomorphism $\phi: G \to G$
 		\item Isogeny: A group homomorphism $\phi : G \to H$ with a finite kernel
@@ -250,7 +251,7 @@ Properties of group homomorphisms:
 
 \begin{block}{Isogeny Example}
 	Multiplication map $[n]: E \to E$ defined by $[n]P = P + P + ...+ P$ ($n$ times):
-	\begin{itemize}
+	\begin{itemize}[\textbullet]
 		\item Maps 0 to itself and is surjective
 		\item $ker[n] = E[n]$, therefore kernel is finite (if elliptic curve is defined over $\mathbb{F}_p$)
 		\item Isogeny [n] can be calculated with elliptic curve addition algorithm %Beispiel an Tafel?
@@ -263,7 +264,7 @@ Properties of group homomorphisms:
 
 \begin{frame}{Isogenies of elliptic curves}
 Let $E_1,E_2$ be 2 elliptic curves over $\mathbb{F}_q$. Then an isogeny is a morphism $\phi: E_1 \to E_2$ s.t.:
-\begin{itemize}
+\begin{itemize}[\textbullet]
 	\item $\phi(0_{E_1})= 0_{E_2}$
 	\item $\#E_1(\mathbb{F}_q) = \#E_2(\mathbb{F}_q)$
 	\item there exists a dual isogeny $\hat{\phi}: E_2 \to E_1$
@@ -310,13 +311,24 @@ Idea: Create Diffie-Hellman exchange over isogenies of elliptic curves. %DLDH an
 \end{frame}
 
 \begin{frame}{The SIKE protocol: Walk-through}
-\begin{enumerate}
-	\item Generate Public Parameters:
-	\begin{enumerate}
-		\item Choose $2^{e_A},3^{e_B}$, search for a prime $p=2^{e_A}3^{e_B}f\pm 1$ and compute $q=p^2$
+\begin{enumerate}[1.]
+	\item Generate public parameters:
+	\begin{enumerate}[(a)]
+		\item Choose $2^{e_A},3^{e_B}$, search for a prime $p=2^{e_A}3^{e_B}f\pm 1$ %and compute $q=p^2$
 		\item Construct elliptic curve $E$ over $\mathbb{F}_q$ of cardinality $(2^{e_A}3^{e_B}f)^2$ %wie geht das?
-		\item Find bases $P_A,Q_A$ and $P_B,Q_B$ that generate $E[2^{e_A}]$ and $E[3^{e_B}]$ respectively, s.t. $\langle P_A,Q_A\rangle$ = $E[2^{e_A}]$ and $\langle P_B,Q_B\rangle$ = $E[3^{e_B}]$ %wie schwierig ist das?
+		\item Find bases $P_A,Q_A$ and $P_B,Q_B$ s.t. $\langle P_A,Q_A\rangle$ = $E[2^{e_A}]$ and $\langle P_B,Q_B\rangle$ = $E[3^{e_B}]$ %wie schwierig ist das?
 	\end{enumerate}
+	\item Generate secret parameters:
+	\begin{enumerate}[(a)]
+		\item Alice picks 2 random secret elements $m_A,n_A < 2^{e_A}$, Bob picks 2 random secret elements $m_B,n_B < 2^{e_B}$
+		\item Alice computes secret isogeny $\phi_A : E \to E/A$ with kernel $\langle [m_A]P_A+[n_A]Q_A\rangle$, Bob computes secret isogeny $\phi_B : E \to E/B$ with kernel $\langle [m_B]P_B+[n_B]Q_B\rangle$
+	\end{enumerate}
+	\item Commutative Action:
+	\begin{enumerate}[(a)]
+			\item Alice computes the image $\{\phi_A(P_B),\phi_A(Q_B)\} \subset E/A$ and sends it to Bob, Bob sends Alice $\{\phi_B(P_A),\phi_B(Q_A)\} \subset E/B$
+			\item Now Alice and Bob both are able to compute the isogeny $E/AB$ with kernel $\langle [m_A]P_A+[n_A]Q_A,[m_B]P_B+[n_B]Q_B \rangle$. Their secret key is the j-invariant $j(E/AB)$
+	\end{enumerate}
+
 \end{enumerate}
 \end{frame}
 %TODO: visualization
@@ -334,6 +346,8 @@ Idea: Create Diffie-Hellman exchange over isogenies of elliptic curves. %DLDH an
 \section{Areas of use}
 
 \section{Security \& Complexity}
+% perfect forward secrecy
+% reuse of keys
 \subsection{SSDH assumption}
 
 
@@ -341,7 +355,7 @@ Idea: Create Diffie-Hellman exchange over isogenies of elliptic curves. %DLDH an
 
 \begin{frame}{Open questions}
 \begin{itemize}
-	\item Why do cryptosystem designers always choose extremly complicated problems that are not even NP-complete?
+	\item Why do cryptosystem designers always choose extremely complicated problems that are not even NP-complete?
 	\item Why not choose one of more than 1000 NP-complete problems? By definition they have a solution that is easy to verify but hard to compute.
 \end{itemize}
 \end{frame}
