@@ -34,7 +34,7 @@
 {\left.\begin{aligned}}
 	{\end{aligned}\right\rbrace}
 
-\title[Shor's Algorithm]{SIKE - Supersingular Isogeny Key Encapsulation}
+\title[SIKE]{SIKE - Supersingular Isogeny Key Encapsulation}
 \author{Jonas von der Heyden}
 \institute{FU Berlin}
 \date{4.6.19}
@@ -55,7 +55,7 @@
 \begin{frame}{Introduction}
 
 	\begin{itemize}
-  		\item Goal of this presentation: Give a high-level overview of Shor's algorithm
+  		\item Goal of this presentation: Give a high-level overview of SIKE protocol
 	\end{itemize}
 
 \end{frame}
@@ -65,7 +65,7 @@
 \subsection{Elliptic Curves}
 
 \begin{frame}{Elliptic curves}
-	Which figure is \textit{not} an elliptic curve?
+	Which of the figures is \textit{not} an elliptic curve?
 	\begin{figure}
 		\begin{minipage}{0.48\textwidth}
 			\centering
@@ -96,7 +96,7 @@
 \end{frame}
 
 \begin{frame}{Elliptic curves}
-	Which figure is \textit{not} an elliptic curve?
+	Which of the figures is \textit{not} an elliptic curve?
 \begin{figure}
 	\begin{minipage}{0.48\textwidth}
 		\centering
@@ -288,9 +288,9 @@ Let $E_1,E_2$ be 2 elliptic curves over $\mathbb{F}_q$. Then an isogeny is a mor
 
 \section{Cryptosystem}
 
-\subsection{SIKE protocol}
+\subsection{SIDH protocol}
 
-\begin{frame}{The SIKE protocol: Main idea}
+\begin{frame}{The SIDH protocol: Main idea}
 Idea: Create Diffie-Hellman exchange over isogenies of elliptic curves. %DLDH an Tafel zeichnen
 \begin{figure}
 	\begin{minipage}{0.5\textwidth}
@@ -310,12 +310,12 @@ Idea: Create Diffie-Hellman exchange over isogenies of elliptic curves. %DLDH an
 
 \end{frame}
 
-\begin{frame}{The SIKE protocol: Walk-through}
+\begin{frame}{The SIDH protocol: Setting up parameters}
 \begin{enumerate}[1.]
 	\item Generate public parameters:
 	\begin{enumerate}[(a)]
 		\item Choose $2^{e_A},3^{e_B}$, search for a prime $p=2^{e_A}3^{e_B}f\pm 1$ %and compute $q=p^2$
-		\item Construct elliptic curve $E$ over $\mathbb{F}_q$ of cardinality $(2^{e_A}3^{e_B}f)^2$ %wie geht das?
+		\item Set $q=p^2$ and construct elliptic curve $E$ over $\mathbb{F}_q$ of cardinality $(2^{e_A}3^{e_B}f)^2$ %wie geht das?
 		\item Find bases $P_A,Q_A$ and $P_B,Q_B$ s.t. $\langle P_A,Q_A\rangle$ = $E[2^{e_A}]$ and $\langle P_B,Q_B\rangle$ = $E[3^{e_B}]$ %wie schwierig ist das?
 	\end{enumerate}
 	\item Generate secret parameters:
@@ -323,35 +323,89 @@ Idea: Create Diffie-Hellman exchange over isogenies of elliptic curves. %DLDH an
 		\item Alice picks 2 random secret elements $m_A,n_A < 2^{e_A}$, Bob picks 2 random secret elements $m_B,n_B < 2^{e_B}$
 		\item Alice computes secret isogeny $\phi_A : E \to E/A$ with kernel $\langle [m_A]P_A+[n_A]Q_A\rangle$, Bob computes secret isogeny $\phi_B : E \to E/B$ with kernel $\langle [m_B]P_B+[n_B]Q_B\rangle$
 	\end{enumerate}
-	\item Commutative Action:
-	\begin{enumerate}[(a)]
-			\item Alice computes the image $\{\phi_A(P_B),\phi_A(Q_B)\} \subset E/A$ and sends it to Bob, Bob sends Alice $\{\phi_B(P_A),\phi_B(Q_A)\} \subset E/B$
-			\item Now Alice and Bob both are able to compute the isogeny $E/AB$ with kernel $\langle [m_A]P_A+[n_A]Q_A,[m_B]P_B+[n_B]Q_B \rangle$. Their secret key is the j-invariant $j(E/AB)$
-	\end{enumerate}
 
 \end{enumerate}
 \end{frame}
-%TODO: visualization
 
-\begin{frame}{Correctness}
+\begin{frame}{The SIDH protocol: Commutative Action}
+
+\begin{enumerate}[1.]
+	\item Compute $\phi_A^{\prime},\phi_B^{\prime}$
+
+	\begin{enumerate}[(a)]
+		\item Alice computes the image $\{\phi_A(P_B),\phi_A(Q_B)\} \subset E/A$ and sends it to Bob and vice versa
+		\item Now Alice is able to compute the point $T_A=[m_A]\phi_B(P_A) + [n_A]\phi_B(Q_A)$ in $E/B$
+		\item Next Alice computes the isogeny $\phi_A^{\prime}$ with kernel $\langle T_A \rangle$ to the curve $E/AB$
+		\item Bob proceeds \textit{mutatis mutandis}. On the next slide we will show that $\langle T_B \rangle  = ker(\phi_B^{\prime})=ker(\phi_A^{\prime})=\langle T_A \rangle$ and therefore $E/AB \simeq E/BA$.
+	\end{enumerate}
+	\item Alice and Bob compute the j-invariant $j(E/AB)=j(E/BA)$ to form a shared secret key 
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{The SIDH protocol: Correctness}
+\textbf{Question:} Why is $ker(\phi_B^{\prime})=ker(\phi_A^{\prime})$?\\
+\vspace{5mm}
+\textbf{Lemma 1:} Let $\phi_1: G_1 \to G_2$ and $\phi_2: G_2 \to G_3$ be group homomorphisms with $ker(\phi_1) = \langle K_1 \rangle$ and $ker(\phi_2) = \phi_1(\langle K_2 \rangle)$. Then for $\phi:G_1 \to G_3$ defined by $\phi=\phi_2 \circ \phi_1$ we have $ker(\phi) =\langle K_1,K_2\rangle$.\\ %beweis an Tafel
+\vspace{5mm}
+
+\textbf{Theorem 2:} $ker(\phi_B^{\prime} \circ \phi_A) = ker(\phi_A^{\prime} \circ \phi_B)$\\
+\textbf{Proof:}
+	\begin{enumerate}[(i)]
+		\item $ker(\phi_B^{\prime})=\phi_A(\langle [m_B]P_B + [n_B]Q_B)\rangle)$
+		\item $ker(\phi_A)=\langle [m_A]P_A + [n_A]Q_A\rangle$
+		\item $ker(\phi_B^{\prime} \circ \phi_A) \stackrel{\text{Lemma 1}}{=} \langle [m_A]P_A + [n_A]Q_A, [m_B]P_B + [n_B]Q_B \rangle$
+		\item The application of Lemma 1 on $\phi_A^{\prime} \circ \phi_B$ yields the same kernel
+	\end{enumerate}
+
+\vfill
+
+Since isogenies are uniquely defined by their kernel, $E/AB \simeq E/BA$.
 
 \end{frame}
 
-\subsection{Efficiency}
+\begin{frame}{The SIDH protocol: Visualization} %besser an due Tafel malen!
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{SIDH_big}
+	\caption{SIDH}
+	\label{fig:sidh_big}
+\end{figure}
+\end{frame}
+
+\begin{frame}{The SIKE protocol}
+
+How does the SIKE specification for NIST PQCC differ from SIDH?
+
+\begin{itemize}[\textbullet]
+	\item Instead of a Weierstrass curve a Montgovery curve $E_0(\mathbb{F}_{p^2}): y^2 = x^3 + 6x^2 +x$ is being used by default
+\end{itemize}
+
+\end{frame}
+
+\subsection{Computation Details and Efficiency}
 
 \begin{frame}{Composition chains of isogenies}
 	% help to make computation of isogenies cheap: see Galbraith p.5
+	% welche Verbesserungen gab es in Runde 2? Wie schnell ist SIKE geworden?
 \end{frame}
 
 \section{Areas of use}
 
 \section{Security \& Complexity}
+% SIKE spec 4.1
 % perfect forward secrecy
 % reuse of keys
+% sidh security paper p.5
+% side channel & error attacks?
 \subsection{SSDH assumption}
 
 
 \section{Discussion}
+
+\begin{frame}{Conclusion}
+%Nachteil: sehr kompliziert, Parameter müssen mit Bedacht ausgewählt werden (SIDH spec 1.3.2.)
+% SIKE spec chapter 6
+\end{frame}
 
 \begin{frame}{Open questions}
 \begin{itemize}
