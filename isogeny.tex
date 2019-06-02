@@ -286,18 +286,7 @@ Let $E_1,E_2$ be 2 elliptic curves over $\mathbb{F}_q$. Then an isogeny is a mor
 
 
 \end{frame}
-\begin{frame}{Endomorphism ring}
 
-
-\begin{itemize}[\textbullet]
-	\item The endomorphism ring of E is the set of isogenies from E to itself: $End(E) = \{\phi:E\to E\} \cup \{0\}$
-	\item Addition of isogenies is defined using elliptic curve addition as $(\phi_1+\phi_2)(P) =  \phi_1(P) + \phi_2(P)$
-	\item Multiplication is the composition $\phi_1 \circ \phi_2$
-	\item Given $E$ and $End(E)$, computing $\phi: E \to E'$ can be reduced to computing $End(E')$. This is shown to be possible in subexponential time on quantum computers, if E is ordinary
-	\item Unlike ordinary curves, the endomorphism ring of supersingular curves is non-commutative and is therefore not susceptible to the quantum attack
-\end{itemize}
-
-\end{frame}
 
 
 \section{Cryptosystem}
@@ -443,7 +432,7 @@ At this stage, it is not suitable for use in embedded devices or microcontroller
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Known attacks}
+\begin{frame}{Known attacks: claw algorithm}
 The best known attack against SIKE is the "claw algorithm":
 
 \begin{enumerate}[(i)]
@@ -452,6 +441,19 @@ The best known attack against SIKE is the "claw algorithm":
 	\item Then compute all $2^{e_A/_2}$-isogenies of the other curve and look for a collision
 	\item Overall space and time requirement is in $\mathcal{O}(p^{1/4})$ on a classical computer and $\mathcal{O}(p^{1/6})$ quantumly
 \end{enumerate}
+\end{frame}
+\begin{frame}{Known attacks: endomorphism ring}
+
+
+\begin{itemize}[\textbullet]
+	\item The endomorphism ring of E is the set of isogenies from E to itself: $End(E) = \{\phi:E\to E\} \cup \{0\}$
+	\item Addition of isogenies is defined using elliptic curve addition as $(\phi_1+\phi_2)(P) =  \phi_1(P) + \phi_2(P)$
+	\item Multiplication is the composition $\phi_1 \circ \phi_2$
+	\item Given $E$ and $End(E)$, computing $\phi: E \to E'$ can be reduced to computing $End(E')$. This is shown to be possible in subexponential time on quantum computers, if E is ordinary
+	\item Unlike ordinary curves, the endomorphism ring of supersingular curves is non-commutative and is therefore not susceptible to the quantum attack
+\end{itemize}
+
+
 
 \end{frame}
 
