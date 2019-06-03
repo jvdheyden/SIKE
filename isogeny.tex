@@ -1,9 +1,6 @@
 \documentclass{beamer}
 %TODO:
-%warum müssen wir supersingular curves benutzen?
-%j-invariants
-% wozu brauchen wir ramanujan graphs?
-% endomorphismen einführen
+%performance metrics
 
 % Choose how your presentation looks.
 %
@@ -12,7 +9,7 @@
 %
 \mode<presentation>
 {
-  \usetheme{boxes}      % or try Darmstadt, Madrid, Warsaw, AISEC ...
+  \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, AISEC ...
   \usecolortheme{dolphin} % or try albatross, beaver, crane, ...
   \usefonttheme{default}  % or try serif, structurebold, ...
   \setbeamertemplate{navigation symbols}{}
@@ -55,11 +52,24 @@
 
 \begin{frame}{Introduction}
 
-	\begin{itemize}
-  		\item Goal of this presentation: Give a high-level overview of SIKE protocol
-  		% advantages: small key sizes, no shor's algorithm because no group action
-  		%disadvantage: too slow (but still in early stages)
-	\end{itemize}
+SIKE - Supersingular Isogeny Key Encapsulation\\
+\vspace{5mm}
+\textbf{The Good:}
+\begin{enumerate}[(i)]
+	\item Very small key sizes
+	\item No commutative group action
+	\item Potential for performance improvements
+\end{enumerate}
+\vspace{5mm}
+\textbf{The Bad:}
+\begin{enumerate}[(i)]
+	\item Comparably poor, yet practical performance
+	\item Very recent
+\end{enumerate}
+
+\vfill
+\textbf{The Ugly:} Concepts are so obscure and complicated that only mathematicians understand it.
+
 
 \end{frame}
 \begin{frame}{Comparison of DH, ECDH and SIDH}
@@ -155,12 +165,12 @@ What is an elliptic curve?
 	\begin{minipage}{0.5\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{P+Q}
-		\caption{P+Q}\label{fig:p+q}
+		\caption{$P+Q=R^{\prime}$}\label{fig:p+q}
 	\end{minipage}\hfill
 	\begin{minipage}{0.48\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{P+P}
-		\caption{P+P}\label{fig:p+p}
+		\caption{$P+P=R^{\prime}$}\label{fig:p+p}
 	\end{minipage}
 \end{figure}
 
@@ -170,7 +180,7 @@ What is an elliptic curve?
 
 		\centering
 		\includegraphics[width=1\linewidth]{P-P}
-		\caption{P-P}\label{fig:p-p}
+		\caption{$P+P^{\prime}=P-P=\mathcal{O}$}\label{fig:p-p}
 
 
 \end{figure}
@@ -216,25 +226,21 @@ What is an elliptic curve?
 		\item Addition law continues to satisfy properties of Abelian Groups
 		\item If \#X is the cardinality of a set X, then \#$E(\mathbb{F}_q) = q+1-t$ for $|t|\leq 2\sqrt{q}$
 		\item An elliptic curve $E(\mathbb{F}_q)$ is called \textit{supersingular} if $p \mid t$ where $q=p^a$
-		\item It follows for all supersingular curves: $\#E(\mathbb{F}_q^n)\equiv 1 \bmod p$ for all $n\in \mathbb{N}$ and $p>3$
+		\item It follows for all supersingular curves: $\#E(\mathbb{F}_{q^n})\equiv 1 \bmod p$ for all $n\in \mathbb{N}$ and $p>3$ % makes it easy to split E into 2 torsion groups
 	\end{itemize}
 	%TODO: (1)Beispiel!, (2) Konsequenz aus letztem Punkt
+	
+\end{frame}
+
+
+\begin{frame}{Why use supersingular curves}
 	
 \end{frame}
 
 \begin{frame}{ECDLP}
 \end{frame}
 
-\subsection{Points of finite order} 
 
-\begin{frame}{Points of finite order}
-\begin{itemize}[\textbullet]
-	\item A point $P\in E$ satisfying $mP=\mathcal{O}$ is called a point of order m in the group E
-	\item $E[m] = \{P\in E: mP = \mathcal{O}\}$ is also called the m-torsion group of E and includes all points of order $m$ in $E$
-	\item $E[m] $ is a subgroup of E since if $P,Q\in E[m]$ then also $P+Q$ and $-P$
-\end{itemize}
- 	
-\end{frame}
 
 \subsection{Isogenies}
 \begin{frame}{Group homomorphisms}
@@ -247,7 +253,7 @@ Properties of group homomorphisms:
 \end{itemize}
 	 
 	
-	%Schaubild an Tafel
+	%TODO: Schaubild an Tafel
 	\begin{block}{Example}
 		$\phi: \mathbb{Z}\to\mathbb{Z}/3\mathbb{Z}$ is surjective and it's kernel consists of all elements in $\mathbb{Z}$ divisible by 3
 		
@@ -256,23 +262,21 @@ Properties of group homomorphisms:
 \end{frame}
 \begin{frame}{Types of Homorphisms}
 	\begin{itemize}[\textbullet]
-		\item Isomorphism: A group homomorphism that is bijective % Schaubild Graphisomorphie
+		\item Isomorphism: A group homomorphism that is bijective 
 		\item Endomorphism: A group homomorphism $\phi: G \to G$
 		\item Isogeny: A group homomorphism $\phi : G \to H$ with a finite kernel
 	\end{itemize}
 
-\begin{block}{Isogeny Example}
-	Multiplication map $[n]: E \to E$ defined by $[n]P = P + P + ...+ P$ ($n$ times):
-	\begin{itemize}[\textbullet]
-		\item Maps 0 to itself and is surjective
-		\item $ker[n] = E[n]$, therefore kernel is finite (if elliptic curve is defined over $\mathbb{F}_p$)
-		\item Isogeny [n] can be calculated with elliptic curve addition algorithm %Beispiel an Tafel?
-		
-	\end{itemize}
-%	Any 2 elliptic curves $E_1,E_2$ over $\mathbb{F}_q$ are isogenous iff $\#E_1(\mathbb{F}_q) = \#E_2(\mathbb{F}_q)$ ($E_1$ and $E_2$ have the same number of points). What about the kernel?
-\end{block}
+\end{frame}
+\begin{frame}{Endomorphism example}
+\begin{itemize}[\textbullet]
+	\item A point $P\in E$ satisfying $mP=\mathcal{O}$ is called a point of order m in the group E
+	\item Endomorphism $E[m] = \{P\in E: mP = \mathcal{O}\}$ is also called the m-torsion group of E and includes all points of order $m$ in $E$
+	\item $E[m] $ is a subgroup of E since if $P,Q\in E[m]$ then also $P+Q$ and $-P$
+\end{itemize}	
 
 \end{frame}
+
 
 \begin{frame}{Isogenies of elliptic curves}  %TODO: Example 3 aus Galbraith an Tafel
 Let $E_1,E_2$ be 2 elliptic curves over $\mathbb{F}_q$. Then an isogeny is a morphism $\phi: E_1 \to E_2$ s.t.:
@@ -284,9 +288,20 @@ Let $E_1,E_2$ be 2 elliptic curves over $\mathbb{F}_q$. Then an isogeny is a mor
 	\item equivalently it is also uniquely defined up to isomorphism by it's j-invariant $j(E)=1728\frac{4A^3}{4A^3+27B^2}$
 	%TODO: how does j-invariant work?
 \end{itemize}
+\end{frame}
 
+\begin{frame}{Isogeny Example}
+	Multiplication map $[n]: E \to E$ defined by $[n]P = P + P + ...+ P$ ($n$ times):
+	\begin{itemize}[\textbullet]
+		\item Maps 0 to itself and is surjective
+		\item $ker[n] = E[n]$, therefore kernel is finite (if elliptic curve is defined over $\mathbb{F}_p$)
+		\item Isogeny [n] can be calculated with elliptic curve addition algorithm %Beispiel an Tafel?
+		
+	\end{itemize}
 
 \end{frame}
+
+
 
 
 
@@ -295,7 +310,7 @@ Let $E_1,E_2$ be 2 elliptic curves over $\mathbb{F}_q$. Then an isogeny is a mor
 \subsection{SIDH protocol}
 
 \begin{frame}{The SIDH protocol: Main idea}
-Idea: Create Diffie-Hellman exchange over isogenies of elliptic curves. %DLDH an Tafel zeichnen
+Idea: Create Diffie-Hellman exchange over isogenies of supersingular elliptic curves %DLDH an Tafel zeichnen
 \begin{figure}
 	\begin{minipage}{0.5\textwidth}
 		\centering
@@ -489,15 +504,23 @@ SIKE is IND-CPA and IND-CCA secure.
 \section{Discussion}
 
 \begin{frame}{Conclusion}
-%Nachteil: sehr kompliziert, daher ist Sicherheitsanalyse schwierig (z.B. für quantum researcher)Parameter müssen mit Bedacht ausgewählt werden (SIDH spec 1.3.2.)
-% SIKE spec chapter 6
-\end{frame}
 
-\begin{frame}{Open questions}
+SIKE summary
 \begin{itemize}[\textbullet]
-
+	
+	\item All known quantum and classical attacks are exponential
+	\item Security research on isogeny-based cryptosystems might not be as extensive as for less complicated cryptosystems
+	\item Great candidate for hybrid cryptosystems
+	\item Current performance magnitude worse than alternative but potential for improvements
+\end{itemize}
+\vfill
+Open Questions
+\begin{itemize}[\textbullet]
+	\item It seems hard to qualify the reliability of SIKE's security assumptions for non-experts in the field
 	\item Why aren't more cryptosystems based on one of the more than 1000 NP-complete problems? 
 \end{itemize}
+%Nachteil: sehr kompliziert, daher ist Sicherheitsanalyse schwierig (z.B. für quantum researcher)Parameter müssen mit Bedacht ausgewählt werden (SIDH spec 1.3.2.)
+% SIKE spec chapter 6
 \end{frame}
 
 \begin{frame}{Questions?}
