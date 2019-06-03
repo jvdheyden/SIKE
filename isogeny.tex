@@ -56,15 +56,15 @@ SIKE - Supersingular Isogeny Key Encapsulation\\
 \vspace{5mm}
 \textbf{The Good:}
 \begin{enumerate}[(i)]
-	\item Very small key sizes
-	\item No commutative group action
-	\item Potential for performance improvements
+	\item Very small key sizes\pause
+	\item No commutative group action\pause
+	\item Potential for performance improvements\pause
 \end{enumerate}
 \vspace{5mm}
 \textbf{The Bad:}
 \begin{enumerate}[(i)]
-	\item Comparably poor, yet practical performance
-	\item Very recent
+	\item Comparably poor, yet practical performance\pause
+	\item Very recent\pause
 \end{enumerate}
 
 \vfill
@@ -188,9 +188,9 @@ What is an elliptic curve?
 \begin{frame}{Abelian Groups (G,+) over Elliptic Curves}
 	Let E be an elliptic curve. Then the addition law on E has the following properties:
 	\begin{enumerate}[1.]
-		\item $P + \mathcal{O} = \mathcal{O} + P$ (Identity)
-		\item $P + (-P) = \mathcal{O}$ (Inverse)
-		\item $(P + Q) + R = P + (Q + R) $ (Associative)
+		\item $P + \mathcal{O} = \mathcal{O} + P$ (Identity)\pause
+		\item $P + (-P) = \mathcal{O}$ (Inverse)\pause
+		\item $(P + Q) + R = P + (Q + R) $ (Associative)\pause
 		\item $P + Q = Q + P$ (Commutative)
 	\end{enumerate}
 
@@ -199,10 +199,10 @@ What is an elliptic curve?
 \begin{frame}{Elliptic Curve Point Addition}
 
 \begin{itemize}[\textbullet]
-	\item Find the line intersecting E at P and Q
-	\item If $P=Q$, find tangent of E with the same gradient like E at point P
-	\item Plug line equation into E and solve to find the  point $R$ of intersection
-	\item Flip y-coordinate to get $R^{\prime}$
+	\item Find the line intersecting E at P and Q\pause
+	\item If $P=Q$, find tangent of E with the same gradient like E at point P\pause
+	\item Plug line equation into E and solve to find the  point $R$ of intersection\pause
+	\item Flip y-coordinate to get $R^{\prime}$\pause
 \end{itemize}
 
 \end{frame}
@@ -232,12 +232,12 @@ What is an elliptic curve?
 
 \begin{frame}{Elliptic Curves over finite fields}
 	\begin{itemize}[\textbullet]
-		\item An elliptic curve over $\mathbb{F}_p$ is an equation of the form $E:Y^2=X^3+AX+B$
-		\item The set of points of E with coordinates in $\mathbb{F}_p$ (for a prime $p>3$) is the set $E(\mathbb{F}_p)=\{(x,y):x,y\in \mathbb{F}_p$ satisfy $y^2=x^3+Ax+B \} \cup \{\mathcal{O}\}$
-		\item Elliptic curve addition algorithm continues to work in $E(\mathbb{F}_p)$
-		\item Addition law continues to satisfy properties of Abelian Groups
-		\item If \#X is the cardinality of a set X, then \#$E(\mathbb{F}_q) = q+1-t$ for $|t|\leq 2\sqrt{q}$
-		\item An elliptic curve $E(\mathbb{F}_q)$ is called \textit{supersingular} if $p \mid t$ where $q=p^a$
+		\item An elliptic curve over $\mathbb{F}_p$ is an equation of the form $E:Y^2=X^3+AX+B$\pause
+		\item The set of points of E with coordinates in $\mathbb{F}_p$ (for a prime $p>3$) is the set $E(\mathbb{F}_p)=\{(x,y):x,y\in \mathbb{F}_p$ satisfy $y^2=x^3+Ax+B \} \cup \{\mathcal{O}\}$\pause
+		\item Elliptic curve addition algorithm continues to work in $E(\mathbb{F}_p)$\pause
+		\item Addition law continues to satisfy properties of Abelian Groups\pause
+		\item If \#X is the cardinality of a set X, then \#$E(\mathbb{F}_q) = q+1-t$ for $|t|\leq 2\sqrt{q}$\pause
+		\item An elliptic curve $E(\mathbb{F}_q)$ is called \textit{supersingular} if $p \mid t$ where $q=p^a$\pause
 		\item It follows for all supersingular curves: $\#E(\mathbb{F}_{q^n})\equiv 1 \bmod p$ for all $n\in \mathbb{N}$ and $p>3$ % makes it easy to split E into 2 torsion groups
 	\end{itemize}
 	%TODO: (1)Beispiel!, (2) Konsequenz aus letztem Punkt
@@ -261,8 +261,8 @@ What is an elliptic curve?
 \begin{frame}{Group homomorphisms}
 Properties of group homomorphisms:
 \begin{itemize}[\textbullet]
-	\item Given 2 groups (G,+), (H,$\oplus$) a group homomorphism is a function $\phi: G \to H$ such that $\phi(u + v) = \phi(u) \oplus \phi(v)$ 
-	\item $\phi(e_G) = e_H$ where $e_G$ and $e_H$ are the identity elements of G and H
+	\item Given 2 groups (G,+), (H,$\oplus$) a group homomorphism is a function $\phi: G \to H$ such that $\phi(u + v) = \phi(u) \oplus \phi(v)$ \pause
+	\item $\phi(e_G) = e_H$ where $e_G$ and $e_H$ are the identity elements of G and H\pause
 	\item The kernel of $\phi$ is the set of elements in $G$ which are mapped to the identity in $H$:
 	$ker(\phi) \equiv \{u\in G:\phi(u)=e_H\}$
 \end{itemize}
@@ -277,16 +277,16 @@ Properties of group homomorphisms:
 \end{frame}
 \begin{frame}{Types of Homorphisms}
 	\begin{itemize}[\textbullet]
-		\item Isomorphism: A group homomorphism that is bijective 
-		\item Endomorphism: A group homomorphism $\phi: G \to G$
+		\item Isomorphism: A group homomorphism that is bijective \pause
+		\item Endomorphism: A group homomorphism $\phi: G \to G$\pause
 		\item Isogeny: A group homomorphism $\phi : G \to H$ with a finite kernel
 	\end{itemize}
 
 \end{frame}
 \begin{frame}{Endomorphism example}
 \begin{itemize}[\textbullet]
-	\item A point $P\in E$ satisfying $mP=\mathcal{O}$ is called a point of order m in the group E
-	\item Endomorphism $E[m] = \{P\in E: mP = \mathcal{O}\}$ is also called the m-torsion group of E and includes all points of order $m$ in $E$
+	\item A point $P\in E$ satisfying $mP=\mathcal{O}$ is called a point of order m in the group E\pause
+	\item Endomorphism $E[m] = \{P\in E: mP = \mathcal{O}\}$ is also called the m-torsion group of E and includes all points of order $m$ in $E$\pause
 	\item $E[m] $ is a subgroup of E since if $P,Q\in E[m]$ then also $P+Q$ and $-P$
 \end{itemize}	
 
@@ -296,10 +296,10 @@ Properties of group homomorphisms:
 \begin{frame}{Isogenies of elliptic curves}  %TODO: Example 3 aus Galbraith an Tafel
 Let $E_1,E_2$ be 2 elliptic curves over $\mathbb{F}_q$. Then an isogeny is a morphism $\phi: E_1 \to E_2$ s.t.:
 \begin{itemize}[\textbullet]
-	\item $\phi(0_{E_1})= 0_{E_2}$
-	\item $\#E_1(\mathbb{F}_q) = \#E_2(\mathbb{F}_q)$
-	\item there exists a dual isogeny $\hat{\phi}: E_2 \to E_1$
-	\item up to isomorphism it is uniquely defined by it's kernel $ker(\phi)$. Because a kernel is also a finite subgroup G of $E_1$ we can also say that $E_2$ is $E_1/G$
+	\item $\phi(0_{E_1})= 0_{E_2}$\pause
+	\item $\#E_1(\mathbb{F}_q) = \#E_2(\mathbb{F}_q)$\pause
+	\item there exists a dual isogeny $\hat{\phi}: E_2 \to E_1$\pause
+	\item up to isomorphism it is uniquely defined by it's kernel $ker(\phi)$. Because a kernel is also a finite subgroup G of $E_1$ we can also say that $E_2$ is $E_1/G$\pause
 	\item equivalently it is also uniquely defined up to isomorphism by it's j-invariant $j(E)=1728\frac{4A^3}{4A^3+27B^2}$
 	%TODO: how does j-invariant work?
 \end{itemize}
@@ -346,14 +346,14 @@ Idea: Create Diffie-Hellman exchange over isogenies of supersingular elliptic cu
 \begin{enumerate}[1.]
 	\item Generate public parameters:
 	\begin{enumerate}[(a)]
-		\item Choose $2^{e_A},3^{e_B}$, search for a prime $p=2^{e_A}3^{e_B}f- 1$ %and compute $q=p^2$
-		\item Set $q=p^2$ and construct elliptic curve $E$ over $\mathbb{F}_q$ of cardinality $(2^{e_A}3^{e_B}f)^2$ %wie geht das?
-		\item Find bases $P_A,Q_A$ and $P_B,Q_B$ s.t. $\langle P_A,Q_A\rangle = E[2^{e_A}]$ and $\langle P_B,Q_B\rangle = E[3^{e_B}]$   %TODO: wie schwierig ist das?
+		\item Choose $2^{e_A},3^{e_B}$, search for a prime $p=2^{e_A}3^{e_B}f- 1$\pause %and compute $q=p^2$
+		\item Set $q=p^2$ and construct elliptic curve $E$ over $\mathbb{F}_q$ of cardinality $(2^{e_A}3^{e_B}f)^2$\pause %wie geht das?
+		\item Find bases $P_A,Q_A$ and $P_B,Q_B$ s.t. $\langle P_A,Q_A\rangle = E[2^{e_A}]$ and $\langle P_B,Q_B\rangle = E[3^{e_B}]$ \pause  %TODO: wie schwierig ist das?
 		\item Note that $\#E[2^{e_A}] =(2^{e_A})^2$
 	\end{enumerate}
 	\item Generate secret parameters:
 	\begin{enumerate}[(a)]
-		\item Alice picks 2 random secret elements $m_A,n_A < 2^{e_A}$, Bob picks 2 random secret elements $m_B,n_B < 2^{e_B}$
+		\item Alice picks 2 random secret elements $m_A,n_A < 2^{e_A}$, Bob picks 2 random secret elements $m_B,n_B < 2^{e_B}$\pause
 		\item Alice computes secret isogeny $\phi_A : E \to E/A$ with kernel $\langle [m_A]P_A+[n_A]Q_A\rangle$, Bob computes secret isogeny $\phi_B : E \to E/B$ with kernel $\langle [m_B]P_B+[n_B]Q_B\rangle$
 	\end{enumerate}
 
@@ -366,9 +366,9 @@ Idea: Create Diffie-Hellman exchange over isogenies of supersingular elliptic cu
 	\item Compute $\phi_A^{\prime},\phi_B^{\prime}$
 
 	\begin{enumerate}[(a)]
-		\item Alice computes the image $\{\phi_A(P_B),\phi_A(Q_B)\} \subset E/A$ and sends it to Bob and vice versa
-		\item Now Alice is able to compute the point $T_A=[m_A]\phi_B(P_A) + [n_A]\phi_B(Q_A)$ in $E/B$
-		\item Next Alice computes the isogeny $\phi_A^{\prime}$ with kernel $\langle T_A \rangle$ to the curve $E/AB$
+		\item Alice computes the image $\{\phi_A(P_B),\phi_A(Q_B)\} \subset E/A$ and sends it to Bob and vice versa\pause
+		\item Now Alice is able to compute the point $T_A=[m_A]\phi_B(P_A) + [n_A]\phi_B(Q_A)$ in $E/B$\pause
+		\item Next Alice computes the isogeny $\phi_A^{\prime}$ with kernel $\langle T_A \rangle$ to the curve $E/AB$\pause
 		\item Bob proceeds \textit{mutatis mutandis}. On the next slide we will show that $\langle T_B \rangle  = ker(\phi_B^{\prime})=ker(\phi_A^{\prime})=\langle T_A \rangle$ and therefore $E/AB \simeq E/BA$.
 	\end{enumerate}
 	\item Alice and Bob compute the j-invariant $j(E/AB)=j(E/BA)$ to form a shared secret key 
@@ -376,17 +376,17 @@ Idea: Create Diffie-Hellman exchange over isogenies of supersingular elliptic cu
 \end{frame}
 
 \begin{frame}{The SIDH protocol: Correctness}
-\textbf{Question:} Why is $ker(\phi_B^{\prime})=ker(\phi_A^{\prime})$?\\
+\textbf{Question:} Why is $ker(\phi_B^{\prime})=ker(\phi_A^{\prime})$?\pause\\
 \vspace{5mm}
-\textbf{Lemma 1:} Let $\phi_1: G_1 \to G_2$ and $\phi_2: G_2 \to G_3$ be group homomorphisms with $ker(\phi_1) = \langle K_1 \rangle$ and $ker(\phi_2) = \phi_1(\langle K_2 \rangle)$. Then for $\phi:G_1 \to G_3$ defined by $\phi=\phi_2 \circ \phi_1$ we have $ker(\phi) =\langle K_1,K_2\rangle$.\\ %beweis an Tafel
+\textbf{Lemma 1:} Let $\phi_1: G_1 \to G_2$ and $\phi_2: G_2 \to G_3$ be group homomorphisms with $ker(\phi_1) = \langle K_1 \rangle$ and $ker(\phi_2) = \phi_1(\langle K_2 \rangle)$. Then for $\phi:G_1 \to G_3$ defined by $\phi=\phi_2 \circ \phi_1$ we have $ker(\phi) =\langle K_1,K_2\rangle$.\pause\\ %beweis an Tafel
 \vspace{5mm}
 
 \textbf{Theorem 2:} $ker(\phi_B^{\prime} \circ \phi_A) = ker(\phi_A^{\prime} \circ \phi_B)$\\
 \textbf{Proof:}
 	\begin{enumerate}[(i)]
-		\item $ker(\phi_B^{\prime})=\phi_A(\langle [m_B]P_B + [n_B]Q_B)\rangle)$
-		\item $ker(\phi_A)=\langle [m_A]P_A + [n_A]Q_A\rangle$
-		\item $ker(\phi_B^{\prime} \circ \phi_A) \stackrel{\text{Lemma 1}}{=} \langle [m_A]P_A + [n_A]Q_A, [m_B]P_B + [n_B]Q_B \rangle$
+		\item $ker(\phi_B^{\prime})=\phi_A(\langle [m_B]P_B + [n_B]Q_B)\rangle)$\pause
+		\item $ker(\phi_A)=\langle [m_A]P_A + [n_A]Q_A\rangle$\pause
+		\item $ker(\phi_B^{\prime} \circ \phi_A) \stackrel{\text{Lemma 1}}{=} \langle [m_A]P_A + [n_A]Q_A, [m_B]P_B + [n_B]Q_B \rangle$\pause
 		\item The application of Lemma 1 on $\phi_A^{\prime} \circ \phi_B$ yields the same kernel
 	\end{enumerate}
 
@@ -412,7 +412,7 @@ Since isogenies are uniquely defined by their kernel, $E/AB \simeq E/BA$.
 \begin{frame}{Efficiently computing isogenies}
 
 
-	\textbf{Problem:} Computing $\phi_G : E \to E/A$ from $E$ and $A$ takes time polynomial in $\#A$. Since $2^{e_A} \in \mathcal{O}(\sqrt{p})$, this is not acceptable.\\
+	\textbf{Problem:} Computing $\phi_G : E \to E/A$ from $E$ and $A$ takes time polynomial in $\#A$. Since $2^{e_A} \in \mathcal{O}(\sqrt{p})$, this is not acceptable.\pause\\
 	\vfill
 	\textbf{Solution:} Compute isogeny of large degree as a composition of isogenies of small degree. Then $\phi = \phi_1 \circ \dots \circ \phi_k \circ [n]$ where $\phi_1 \circ \dots \circ \phi_k$ are isogenies of prime degree that are defined over $\mathbb{F}_q$ and $deg(\phi) = n^2 \prod^k_{i=1} deg(\phi_i)$.\\
 	 While computing the composition of $t$ isogenies of degree $t$ takes time proportional to $t$, the cost of computing the composition in a single step is in $\mathcal{O}(2^t)$\\
@@ -437,9 +437,9 @@ How does the SIKE specification for NIST PQ competition differ from SIDH?
 SIKE is characterized by having a very small key size but being fairly inefficient in the key-generation. Therefore it seems to be most suitable for:
 \begin{itemize}[\textbullet]
 	
-	\item Securing applications where bandwidth is a more precious commodity than computational cycles, e.g. Bitcoin and Tor
-	\item Securing TLS once further research has resulted in better performance
-	\item Use in a hybrid cryptosystem combining untested post-quantum-cryptography with a conventional encryption scheme since it can use the same elliptic curve like ECDH	
+	\item Securing applications where bandwidth is a more precious commodity than computational cycles, e.g. Bitcoin and Tor\pause
+	\item Securing TLS once further research has resulted in better performance\pause
+	\item Use in a hybrid cryptosystem combining untested post-quantum-cryptography with a conventional encryption scheme since it can use the same elliptic curve like ECDH	\pause
 \end{itemize}
 At this stage, it is not suitable for use in embedded devices or microcontrollers due to high energy demand.
 \end{frame}
@@ -470,9 +470,9 @@ At this stage, it is not suitable for use in embedded devices or microcontroller
 The best known attack against SIKE is the "claw algorithm":
 
 \begin{enumerate}[(i)]
-	\item Given $\phi : E \to E_A$ with $deg(\phi) = 2^{e_A}$, find $\phi$
-	\item Start with computing all $2^{e_A/_2}$-isogenies of one curve in $\mathcal{O}(p^{1/4})$ space and time
-	\item Then compute all $2^{e_A/_2}$-isogenies of the other curve and look for a collision
+	\item Given $\phi : E \to E_A$ with $deg(\phi) = 2^{e_A}$, find $\phi$\pause
+	\item Start with computing all $2^{e_A/_2}$-isogenies of one curve in $\mathcal{O}(p^{1/4})$ space and time\pause
+	\item Then compute all $2^{e_A/_2}$-isogenies of the other curve and look for a collision\pause
 	\item Overall space and time requirement is in $\mathcal{O}(p^{1/4})$ on a classical computer and $\mathcal{O}(p^{1/6})$ quantumly
 \end{enumerate}
 \end{frame}
@@ -480,10 +480,10 @@ The best known attack against SIKE is the "claw algorithm":
 
 
 \begin{itemize}[\textbullet]
-	\item The endomorphism ring of E is the set of isogenies from E to itself: $End(E) = \{\phi:E\to E\} \cup \{0\}$
-	\item Addition of isogenies is defined using elliptic curve addition as $(\phi_1+\phi_2)(P) =  \phi_1(P) + \phi_2(P)$
-	\item Multiplication is the composition $\phi_1 \circ \phi_2$
-	\item Given $E$ and $End(E)$, computing $\phi: E \to E'$ can be reduced to computing $End(E')$. This is shown to be possible in subexponential time on quantum computers, if E is ordinary
+	\item The endomorphism ring of E is the set of isogenies from E to itself: $End(E) = \{\phi:E\to E\} \cup \{0\}$\pause
+	\item Addition of isogenies is defined using elliptic curve addition as $(\phi_1+\phi_2)(P) =  \phi_1(P) + \phi_2(P)$\pause
+	\item Multiplication is the composition $\phi_1 \circ \phi_2$\pause
+	\item Given $E$ and $End(E)$, computing $\phi: E \to E'$ can be reduced to computing $End(E')$. This is shown to be possible in subexponential time on quantum computers, if E is ordinary\pause
 	\item Unlike ordinary curves, the endomorphism ring of supersingular curves is non-commutative and is therefore not susceptible to the quantum attack
 \end{itemize}
 
@@ -524,15 +524,15 @@ SIKE is IND-CPA and IND-CCA secure.
 SIKE summary
 \begin{itemize}[\textbullet]
 	
-	\item All known quantum and classical attacks are exponential
-	\item Security research on isogeny-based cryptosystems might not be as extensive as for less complicated cryptosystems
-	\item Great candidate for hybrid cryptosystems
-	\item Current performance worse than alternatives, but potential for improvements
+	\item All known quantum and classical attacks are exponential\pause
+	\item Security research on isogeny-based cryptosystems might not be as extensive as for less complicated cryptosystems\pause
+	\item Great candidate for hybrid cryptosystems\pause
+	\item Current performance worse than alternatives, but potential for improvements\pause
 \end{itemize}
 \vfill
 Open Questions
 \begin{itemize}[\textbullet]
-	\item It seems hard to qualify the reliability of SIKE's security assumptions for non-experts in the field
+	\item How can we qualify the reliability of SIKE's security assumptions?\pause
 	\item Why aren't more cryptosystems based on one of the more than 1000 NP-complete problems? 
 \end{itemize}
 %Nachteil: sehr kompliziert, daher ist Sicherheitsanalyse schwierig (z.B. für quantum researcher)Parameter müssen mit Bedacht ausgewählt werden (SIDH spec 1.3.2.)
