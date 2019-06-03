@@ -3,6 +3,7 @@
 %warum müssen wir supersingular curves benutzen?
 %j-invariants
 % wozu brauchen wir ramanujan graphs?
+% endomorphismen einführen
 
 % Choose how your presentation looks.
 %
@@ -210,7 +211,7 @@ What is an elliptic curve?
 \begin{frame}{Elliptic Curves over finite fields}
 	\begin{itemize}[\textbullet]
 		\item An elliptic curve over $\mathbb{F}_p$ is an equation of the form $E:Y^2=X^3+AX+B$
-		\item The set of points of E with coordinates in $\mathbb{F}_p$ is the set $E(\mathbb{F}_p)=\{(x,y):x,y\in \mathbb{F}_p$ satisfy $y^2=x^3+Ax+B \} \cup \{\mathcal{O}\}$
+		\item The set of points of E with coordinates in $\mathbb{F}_p$ (for a prime $p>3$) is the set $E(\mathbb{F}_p)=\{(x,y):x,y\in \mathbb{F}_p$ satisfy $y^2=x^3+Ax+B \} \cup \{\mathcal{O}\}$
 		\item Elliptic curve addition algorithm continues to work in $E(\mathbb{F}_p)$
 		\item Addition law continues to satisfy properties of Abelian Groups
 		\item If \#X is the cardinality of a set X, then \#$E(\mathbb{F}_q) = q+1-t$ for $|t|\leq 2\sqrt{q}$
@@ -393,7 +394,9 @@ How does the SIKE specification for NIST PQ competition differ from SIDH?
 	\textbf{Problem:} Computing $\phi_G : E \to E/A$ from $E$ and $A$ takes time polynomial in $\#A$. Since $2^{e_A} \in \mathcal{O}(\sqrt{p})$, this is not acceptable.\\
 	\vfill
 	\textbf{Solution:} Compute isogeny of large degree as a composition of isogenies of small degree. Then $\phi = \phi_1 \circ \dots \circ \phi_k \circ [n]$ where $\phi_1 \circ \dots \circ \phi_k$ are isogenies of prime degree that are defined over $\mathbb{F}_q$ and $deg(\phi) = n^2 \prod^k_{i=1} deg(\phi_i)$.\\
-	 While computing the composition of $t$ isogenies of degree $t$ takes time proportional to $t$, the cost of computing the composition in a single step is in $\mathcal{O}(2^t)$ 
+	 While computing the composition of $t$ isogenies of degree $t$ takes time proportional to $t$, the cost of computing the composition in a single step is in $\mathcal{O}(2^t)$\\
+	 
+	%TODO: Grund für supersingular curves: rational torsion points that makes efficient computation possible	
 
 \end{frame}
 
