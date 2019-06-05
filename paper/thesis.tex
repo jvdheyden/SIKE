@@ -1,0 +1,121 @@
+\title{SIKE: Supersingular Isogeny Key Encapsulation}
+\author{
+        Jonas von der Heyden \\
+        Student Bachelor of Science\\
+        Freie Universität\"at Berlin\\
+}
+\date{\today}
+
+\documentclass[12pt]{article}
+\usepackage[ruled, vlined, linesnumbered]{algorithm2e} % pseudo code
+\usepackage{amsmath} % math symbols
+\usepackage{amssymb} % other symbols
+\usepackage[toc,page]{appendix}
+\usepackage[ngerman, english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{caption} % quotes
+\usepackage{csquotes} % quotes
+\usepackage{enumitem} % better enumerations
+\usepackage{nameref} % to use more sophisticated references
+\usepackage{setspace} % to use setstretch to influence line height
+\usepackage{listings} % Formatting for code
+\usepackage{titlesec} % section titles
+\usepackage{braket} % dirac notation
+\usepackage{physics} %norm
+\usepackage{epigraph} % for quotes as well
+\usepackage{tikz,amstext} % drawings
+\usetikzlibrary{decorations,decorations.markings,decorations.text,decorations.pathreplacing,decorations.pathmorphing}
+\usepackage{graphicx} % insert pdfs
+\graphicspath{ {img/} }
+\usepackage{hyperref} % links
+\renewcommand{\mkbegdispquote}[2]{\itshape} % displayquote = italic
+
+
+\usepackage[backend=biber,sorting=none]{biblatex}
+
+\addbibresource{references.bib}
+
+\titleformat{\paragraph} 
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\def\labelitemi{--}
+
+\makeindex
+
+\newenvironment{rcases} % for right braces
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+
+\begin{document}
+\makeatletter
+\makeatother
+\begin{titlepage}  
+\center 
+\textsc{\LARGE Freie Universität Berlin}\\[1.5cm]
+\textsc{\Large Term paper}\\[0.5cm]
+\rule{\linewidth}{0.5mm}\\[0.4cm]
+{\large\bfseries\setstretch{2.0} SIKE - Supersingular Isogeny Key Encapsulation}\\[0.4cm]
+\rule{\linewidth}{0.5mm}\\[1.5cm]
+
+\begin{minipage}[t]{0.4\textwidth}
+	\begin{flushleft}
+		\large
+		\textit{Author}\\
+		Jonas \textsc{von der Heyden}
+	\end{flushleft}
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+	\begin{flushright}
+		\large
+                \textit{Supervisor}\\
+        \textsc{Prof. Dr. Marian Margraf}\\
+	\end{flushright}
+\end{minipage}  
+
+
+\vfill\vfill\vfill
+{\large\today}
+
+\end{titlepage}
+
+% Anfang Inhaltsverzeichnis
+\pagenumbering{roman}
+\setcounter{page}{1}
+\tableofcontents{}
+
+\newpage
+
+% Anfang Haupttext
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{chapters/introduction}
+\clearpage
+
+\input{chapters/maths}
+\clearpage
+
+\input{chapters/cryptosystem}
+\clearpage
+
+\input{chapters/areas_of_use}
+\clearpage
+
+\input{chapters/security}
+\clearpage
+
+\input{chapters/discussion}
+\clearpage
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+\clearpage
+
+\clearpage
+
+\clearpage
+\printbibliography
+\end{document}
