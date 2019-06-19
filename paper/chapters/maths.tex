@@ -1,18 +1,74 @@
 % !TeX root = ../thesis.tex
 \section{Mathematical primitive}
-\subsection{Introduction}
+\subsection{Elliptic Curves}
 % silverman 
 An elliptic curve is the set of solutions to a \textit{Weierstrass equation} of the form $Y^2=X^3+AX+B$.\\ 
 
 % TODO: Bild elliptische Kurve über R
 
-What makes elliptic curves special is that it is possible to define addition in a way that transforms an elliptic curve into an abelian group (E,+):
-Let $P$ and $Q$ be two points on an elliptic curve $E$, as illustrated (%TODO).
-Line $L$ intersects $E$ at three points, namely $P$,$Q$ and one other point $R$. The reflection $R*{\prime}$ of $R$ across the x-axis is called the "sum of $P$ and $Q$": $P \oplus Q = R^{\prime}$
+What makes elliptic curves special is that it is possible to define addition in a way that transforms an elliptic curve into an abelian group (E,+):\\
+Let $P$ and $Q$ be two points on an elliptic curve $E$, as illustrated. %TODO).
+Line $L$ intersects $E$ at three points, namely $P$,$Q$ and one other point $R$. The reflection $R^{\prime}$ of $R$ across the x-axis is called the "sum of $P$ and $Q$": $P \oplus Q = R^{\prime}$\\
+
+What happens if a point $P$ is added to itself? In this case we take the gradient of $E$ at $P$ and use it to calculate the tangent line. %TODO: illustration
+Just like in the case of two non-equal points the tangent line is guaranteed to intersect the elliptic curve and we can use the reflection of this intersection as our sum $R^{\prime} = P \oplus P$. \\
+
+But what happens if we try to add a point to it's reflection? Now the line is orthogonal to the x-axis and does not intersect the elliptic curve at a third point. Therefore the addition of the reflection is defined as $P \oplus P^{\prime} = \mathcal{O}$ so that $P^{\prime}$ is the inverse of $P$ and $\mathcal{O}$ is the identity in $(E,+)$.\\
+
+So that $(E,+)$ is an abelian group the following conditions need to hold:
+
+	\begin{enumerate}[1.]
+	\item $P + \mathcal{O} = \mathcal{O} + P$ (Identity)
+	\item $P + (-P) = \mathcal{O}$ (Inverse)
+	\item $(P + Q) + R = P + (Q + R) $ (Associative)
+	\item $P + Q = Q + P$ (Commutative)
+	\end{enumerate}
+
+While 1., 2. and 4. are intuitively clear, the proof for 3. is more elaborate and can be looked up in .\\ %TODO: reference.
+
+To compute the addition of two points of an elliptic curve, one needs to find the intersection of the tangent with E and then flip the y-coordinate of the intersection point. An addition algorithm is presented below: \\
+
+Let $E : Y^2 = X^3 + AX + B$ be an elliptic curve and let $P_1$ and $P_2$ be points on E.
+\begin{enumerate}[1.]
+	\item If $P_1 = \mathcal{O}$, then $P_1 + P_2 = P_2$
+	\item Otherwise, if $P_2=\mathcal{O}$, then $P_1 + P_2 = P_1$
+	\item Otherwise, write $P_1 = (x_1,y_1)$ and $P_1 = (x_2,y_2)$
+	\item If $x_1 = x_2$ and $y_1=-y_2$, then $P_1+P_2=\mathcal{O}$
+	\item Otherwise, define \\
+	\qquad \qquad \qquad$\lambda =
+	\begin{cases}
+	\frac{y_2-y_1}{x_2-x_1}\text{\quad if }P_1 \neq P_2\\
+	\\
+	\frac{3x_1^2 +A}{2y_1}\text{\quad if }P_1=P_2 
+	\end{cases}$\\
+	\vspace{5mm}
+	and let $x_3=\lambda^2-x_1-x_2$ and $y_3=\lambda(x_1-x_3)-y_1$.\\
+	\vspace{5mm}
+	Then $P_1+P_2=(x_3,y_3)$.
+\end{enumerate}
+
+Elliptic curves can also be defined over a finite field $\mathbb{F}_p$. The set of points of E with coordinates in $\mathbb{F}_p$ (for a prime $p>3$) is the set $E(\mathbb{F}_p)=\{(x,y):x,y\in \mathbb{F}_p$ satisfy $y^2=x^3+Ax+B \} \cup \{\mathcal{O}\}$. It can be shown that the addition law as well as the addition algorithm continue to hold in  $\mathbb{F}_p$ and it's extension field $\mathbb{F}_{p^n}$.
 
 
-\subsection{Elliptic Curves}
+\subsection{Supersingularity}
 
+An elliptic curve generates $\#E(\mathbb{F}_q) = q+1-t$ points for $|t|\leq 2\sqrt{q}$. An elliptic curve $E(\mathbb{F}_q)$ is called \textit{supersingular} if $p \mid t$ where $q=p^a$. It follows for all supersingular curves that $\#E(\mathbb{F}_{q^n})\equiv 1 \bmod p$ for all $n\in \mathbb{N}$ and $p>3$. This makes it easy to split the curve into many low-degree torsion groups, which is required for the efficient computation of isogenies. In addition it can be ensured that supersingular curves are only isogenous to other supersingular curves since isogenous curves always have the same number of points.\\ %TODO: ref for section isogenies
+
+An additional reason for the use of supersingular curvs is that their endomorphism ring does not commute which prevents a known quantum attack against an earlier cryptosystem based on isogenies between ordinary elliptic curves. 
 
 
 \subsection{Isogenies}
+Given two groups (G,+), (H,$\oplus$) a group homomorphism is a function $\phi: G \to H$ such that $\phi(u + v) = \phi(u) \oplus \phi(v)$ and $\phi(e_G) = e_H$ where $e_G$ and $e_H$ are the identity elements of G and H. The kernel of $\phi$ is the set of elements in $G$ which are mapped to the identity in $H$: $ker(\phi) \equiv \{u\in G:\phi(u)=e_H\}$.\\
+
+An isogeny is a group homomorphism $\phi : G \to H$ with a finite kernel. To be more precise, let $E_1,E_2$ be 2 elliptic curves over $\mathbb{F}_q$. Then an isogeny is a morphism $\phi: E_1 \to E_2$ s.t.:
+\begin{itemize}[\textbullet]
+	\item $\phi(0_{E_1})= 0_{E_2}$
+	\item $\#E_1(\mathbb{F}_q) = \#E_2(\mathbb{F}_q)$
+	\item there exists a dual isogeny $\hat{\phi}: E_2 \to E_1$
+	\item up to isomorphism it is uniquely defined by it's kernel $ker(\phi)$. Because a kernel is also a finite subgroup G of $E_1$ we can also say that $E_2$ is $E_1/G$
+	\item equivalently it is also uniquely defined up to isomorphism by it's j-invariant $j(E)=1728\frac{4A^3}{4A^3+27B^2}$
+	%TODO: how does j-invariant work?
+\end{itemize}
+
+
+

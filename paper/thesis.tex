@@ -7,6 +7,7 @@
 \date{\today}
 
 \documentclass[12pt]{article}
+\usepackage[shortlabels]{enumitem} % counter styles for enumerations
 \usepackage[ruled, vlined, linesnumbered]{algorithm2e} % pseudo code
 \usepackage{amsmath} % math symbols
 \usepackage{amssymb} % other symbols
@@ -16,7 +17,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage{caption} % quotes
 \usepackage{csquotes} % quotes
-\usepackage{enumitem} % better enumerations
 \usepackage{nameref} % to use more sophisticated references
 \usepackage{setspace} % to use setstretch to influence line height
 \usepackage{listings} % Formatting for code
@@ -30,6 +30,7 @@
 \graphicspath{ {img/} }
 \usepackage{hyperref} % links
 \renewcommand{\mkbegdispquote}[2]{\itshape} % displayquote = italic
+
 
 
 \usepackage[backend=biber,sorting=none]{biblatex}
