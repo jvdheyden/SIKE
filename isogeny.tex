@@ -285,8 +285,8 @@ Properties of group homomorphisms:
 \end{frame}
 \begin{frame}{Endomorphism example}
 \begin{itemize}[\textbullet]
-	\item A point $P\in E$ satisfying $mP=\mathcal{O}$ is called a point of order m in the group E\pause
-	\item Endomorphism $E[m] = \{P\in E: mP = \mathcal{O}\}$ is also called the m-torsion group of E and includes all points of order $m$ in $E$\pause
+	\item A point $P\in E$ satisfying $[m]P=\mathcal{O}$ is called a point of order m in the group E\pause
+	\item Endomorphism $E[m] = \{P\in E: [m]P = \mathcal{O}\}$ is also called the m-torsion group of E and includes all points of order $m$ in $E$\pause
 	\item $E[m] $ is a subgroup of E since if $P,Q\in E[m]$ then also $P+Q$ and $-P$
 \end{itemize}	
 
@@ -306,7 +306,7 @@ Let $E_1,E_2$ be 2 elliptic curves over $\mathbb{F}_q$. Then an isogeny is a mor
 \end{frame}
 
 \begin{frame}{Isogeny Example}
-	Multiplication map $[n]: E \to E$ defined by $[n]P = P + P + ...+ P$ ($n$ times):
+	Multiplication map $[n]: E \to E^{\prime}$ defined by $[n]P = P + P + ...+ P$ ($n$ times):
 	\begin{itemize}[\textbullet]
 		\item Maps 0 to itself
 
@@ -353,7 +353,7 @@ Idea: Create Diffie-Hellman exchange over isogenies of supersingular elliptic cu
 	\end{enumerate}
 	\item Generate secret parameters:
 	\begin{enumerate}[(a)]
-		\item Alice picks 2 random secret elements $m_A,n_A < 2^{e_A}$, Bob picks 2 random secret elements $m_B,n_B < 2^{e_B}$\pause
+		\item Alice picks 2 random secret elements $m_A,n_A < 2^{e_A}$, Bob picks 2 random secret elements $m_B,n_B < 3^{e_B}$\pause
 		\item Alice computes secret isogeny $\phi_A : E \to E/A$ with kernel $\langle [m_A]P_A+[n_A]Q_A\rangle$, Bob computes secret isogeny $\phi_B : E \to E/B$ with kernel $\langle [m_B]P_B+[n_B]Q_B\rangle$
 	\end{enumerate}
 
