@@ -396,14 +396,14 @@ Since isogenies are uniquely defined by their kernel, $E/AB \simeq E/BA$.
 
 \end{frame}
 
-\begin{frame}{The SIDH protocol: Visualization} %besser an due Tafel malen!
-\begin{figure}
-	\centering
-	\includegraphics[width=0.7\linewidth]{SIDH_big}
-	\caption{SIDH}
-	\label{fig:sidh_big}
-\end{figure}
-\end{frame}
+%\begin{frame}{The SIDH protocol: Visualization} %besser an due Tafel malen!
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=0.7\linewidth]{SIDH_big}
+%	\caption{SIDH}
+%	\label{fig:sidh_big}
+%\end{figure}
+%\end{frame}
 
 
 
@@ -420,17 +420,17 @@ Since isogenies are uniquely defined by their kernel, $E/AB \simeq E/BA$.
 	%TODO: Grund für supersingular curves: rational torsion points that makes efficient computation possible	
 
 \end{frame}
-\begin{frame}{The SIKE protocol}
-
-How does the SIKE specification for NIST PQ competition differ from SIDH?
-
-\begin{itemize}[\textbullet]
-	%	\item SIKE is a key encapsulation scheme that uses the SIDH protocol to generate a shared key between 2 parties % TODO: vielleicht key encapsulation kurz zeigen
-	\item SIKE is IND-CPA-secure and IND-CCA-secure %TODO: noch herausfinden warum
-	\item SIKE uses compression to reduce key sizes and computes private keys in constant time to defend against side-channel attacks
-\end{itemize}
-
-\end{frame}
+%\begin{frame}{The SIKE protocol}
+%
+%How does the SIKE specification for NIST PQ competition differ from SIDH?
+%
+%\begin{itemize}[\textbullet]
+%	%	\item SIKE is a key encapsulation scheme that uses the SIDH protocol to generate a shared key between 2 parties % TODO: vielleicht key encapsulation kurz zeigen
+%	\item SIKE is IND-CPA-secure and IND-CCA-secure %TODO: noch herausfinden warum
+%	\item SIKE uses compression to reduce key sizes and computes private keys in constant time to defend against side-channel attacks
+%\end{itemize}
+%
+%\end{frame}
 \section{Areas of use}
 
 \begin{frame}{Areas of use}
@@ -453,26 +453,26 @@ At this stage, it is not suitable for use in embedded devices or microcontroller
 \end{frame}
 
 \section{Security \& Complexity}
-
-% SIKE spec 4.1
-% perfect forward secrecy
-% reuse of keys
-% sidh security paper p.5
-% side channel & error attacks?
-% galbraith: security of all schemes of this type depends on the difficulty of computing the endomorphism ring of a supersingular elliptic curve
-%why supersingular: because of endomorphism ring
-\begin{frame}{Security assumptions} %Mündlich: Es wird angenommen, dass diese Probleme schwer sind.
-\begin{enumerate}[1.]
-	\item \textbf{Computational Supersingular Isogeny problem:}\\
-	Let $\phi_A:E\to E/A$ be an isogeny with $ker(\phi_A)=\langle [m_A]P_A+[n_A]Q_A\rangle$. Given $E/A$ and the values $\phi_A(P_B),\phi_A(Q_B)$ find a generator $R_A$ of $\langle [m_A]P_A+[n_A]Q_A\rangle$\pause
-	\vspace{5mm}
-	\item \textbf{Computational Supersingular Diffie-Hellman problem:}\\ 
-	Let $\phi_A:E\to E/A$ be an isogeny with $ker(\phi_A)=\langle [m_A]P_A+[n_A]Q_A\rangle$ and let $\phi_B:E\to E/A$ be an isogeny with $ker(\phi_B)=\langle [m_B]P_B+[n_B]Q_B\rangle$
-	Given $E/A,E/B$ and the points $\phi_A(P_B),\phi_A(Q_B),\phi_B(P_A),\phi_B(Q_A)$ find the j-invariant of $E/\langle [m_A]P_A+[n_A]Q_A,[m_B]P_B+[n_B]Q_B \rangle$\pause
-	\vfill
-	It is being assumed that both problems are hard. There is no reduction to an NP-complete problem.
-\end{enumerate}
-\end{frame}
+%
+%% SIKE spec 4.1
+%% perfect forward secrecy
+%% reuse of keys
+%% sidh security paper p.5
+%% side channel & error attacks?
+%% galbraith: security of all schemes of this type depends on the difficulty of computing the endomorphism ring of a supersingular elliptic curve
+%%why supersingular: because of endomorphism ring
+%\begin{frame}{Security assumptions} %Mündlich: Es wird angenommen, dass diese Probleme schwer sind.
+%\begin{enumerate}[1.]
+%	\item \textbf{Computational Supersingular Isogeny problem:}\\
+%	Let $\phi_A:E\to E/A$ be an isogeny with $ker(\phi_A)=\langle [m_A]P_A+[n_A]Q_A\rangle$. Given $E/A$ and the values $\phi_A(P_B),\phi_A(Q_B)$ find a generator $R_A$ of $\langle [m_A]P_A+[n_A]Q_A\rangle$\pause
+%	\vspace{5mm}
+%	\item \textbf{Computational Supersingular Diffie-Hellman problem:}\\ 
+%	Let $\phi_A:E\to E/A$ be an isogeny with $ker(\phi_A)=\langle [m_A]P_A+[n_A]Q_A\rangle$ and let $\phi_B:E\to E/A$ be an isogeny with $ker(\phi_B)=\langle [m_B]P_B+[n_B]Q_B\rangle$
+%	Given $E/A,E/B$ and the points $\phi_A(P_B),\phi_A(Q_B),\phi_B(P_A),\phi_B(Q_A)$ find the j-invariant of $E/\langle [m_A]P_A+[n_A]Q_A,[m_B]P_B+[n_B]Q_B \rangle$\pause
+%	\vfill
+%	It is being assumed that both problems are hard. There is no reduction to an NP-complete problem.
+%\end{enumerate}
+%\end{frame}
 
 \begin{frame}{Known attacks: claw algorithm}
 The best known attack against SIKE is the "claw algorithm":
@@ -484,46 +484,46 @@ The best known attack against SIKE is the "claw algorithm":
 	\item Overall space and time requirement is in $\mathcal{O}(p^{1/4})$ on a classical computer and $\mathcal{O}(p^{1/6})$ quantumly
 \end{enumerate}
 \end{frame}
-\begin{frame}{Known attacks: endomorphism ring}
+%\begin{frame}{Known attacks: endomorphism ring}
 
 
-\begin{itemize}[\textbullet]
-	\item The endomorphism ring of E is the set of isogenies from E to itself: $End(E) = \{\phi:E\to E\} \cup \{0\}$\pause
-	\item Addition of isogenies is defined using elliptic curve addition as $(\phi_1+\phi_2)(P) =  \phi_1(P) + \phi_2(P)$\pause
-	\item Multiplication is the composition $\phi_1 \circ \phi_2$\pause
-	\item Given $E$ and $End(E)$, computing $\phi: E \to E'$ can be reduced to computing $End(E')$. This is shown to be possible in subexponential time on quantum computers, if E is ordinary\pause
-	\item Unlike ordinary curves, the endomorphism ring of supersingular curves is non-commutative and is therefore not susceptible to the quantum attack
-\end{itemize}
+%\begin{itemize}[\textbullet]
+%	\item The endomorphism ring of E is the set of isogenies from E to itself: $End(E) = \{\phi:E\to E\} \cup \{0\}$\pause
+%	\item Addition of isogenies is defined using elliptic curve addition as $(\phi_1+\phi_2)(P) =  \phi_1(P) + \phi_2(P)$\pause
+%	\item Multiplication is the composition $\phi_1 \circ \phi_2$\pause
+%	\item Given $E$ and $End(E)$, computing $\phi: E \to E'$ can be reduced to computing $End(E')$. This is shown to be possible in subexponential time on quantum computers, if E is ordinary\pause
+%	\item Unlike ordinary curves, the endomorphism ring of supersingular curves is non-commutative and is therefore not susceptible to the quantum attack
+%\end{itemize}
+%
+%
+%
+%\end{frame}
 
-
-
-\end{frame}
-
-\begin{frame}{Resistance against side-channel and fault attacks}
-Attack vectors for timing, power and fault analysis:
-\begin{itemize}[\textbullet]
-	\item Computation of the hidden kernel point
-	\item Computation of the secret isogeny
-\end{itemize}
-
-\vfill
-
-As a countermeasure all secret values are being computed using constant-time-functions. However, this does not defend against fault injection attacks.
-
-
-\end{frame}
-
-\begin{frame}{Passive and active security}
-
-SIKE is IND-CPA and IND-CCA secure.
-
-\begin{itemize}[\textbullet]
-	\item \textbf{IND-CPA}: SIDH can be modified to be secure against a passive attacker by converting it into an ElGamal scheme
-	\item \textbf{IND-CCA}: By using a Key-Encapsulation-Mechanism (KEM) it is possible to prevent any active attacks as well
-\end{itemize}
-
-%costello slides
-\end{frame}
+%\begin{frame}{Resistance against side-channel and fault attacks}
+%Attack vectors for timing, power and fault analysis:
+%\begin{itemize}[\textbullet]
+%	\item Computation of the hidden kernel point
+%	\item Computation of the secret isogeny
+%\end{itemize}
+%
+%\vfill
+%
+%As a countermeasure all secret values are being computed using constant-time-functions. However, this does not defend against fault injection attacks.
+%
+%
+%\end{frame}
+%
+%\begin{frame}{Passive and active security}
+%
+%SIKE is IND-CPA and IND-CCA secure.
+%
+%\begin{itemize}[\textbullet]
+%	\item \textbf{IND-CPA}: SIDH can be modified to be secure against a passive attacker by converting it into an ElGamal scheme
+%	\item \textbf{IND-CCA}: By using a Key-Encapsulation-Mechanism (KEM) it is possible to prevent any active attacks as well
+%\end{itemize}
+%
+%%costello slides
+%\end{frame}
 
 \section{Discussion}
 
