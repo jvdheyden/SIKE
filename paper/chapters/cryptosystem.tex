@@ -12,8 +12,16 @@ The idea of the SIKE cryptosystem is to establish a Diffie-Hellman key-exchange 
 	\item In order to allow Bob compute a secret point in E/A, Alice sends him $\phi_A(P_B)$ and $\phi_A(Q_B)$. Upon receival Bob then finds $T_B = \phi_A([m_B]P_B + [n_B]Q_B)$ in $E/A$ and uses $\langle T_B \rangle$ as kernel for $\phi^{\prime}_B : E/A \to E/BA$. Alice proceeds \textit{mutatis mutandis} with $T_A = \phi_B([m_A]P_A + [n_A]Q_A)$ and computes $\phi^{\prime}_A : E/B \to E/AB$ with $ker(\phi^{\prime}_A)= \langle T_A \rangle$.
 	\item As shown in \ref{ch:correctness}, $E/AB \cong E/BA$ and therefore the shared secret key can be generated from $j(E/AB)=j(E/BA)$.
 \end{enumerate} 		%TODO: Schaubild anhängen
-	The public parameters in this protocol are $e_A,e_B$, $p$, $E$, $E/A$, $E/B$,$P_A,Q_A,P_B,Q_B, \phi_A(P_B)$, $\phi_A(Q_B)$, $\phi_B(P_A)$ and $\phi_B(Q_A)$. Secret parameters entail $m_A,n_A$, $m_B,n_B$, $\phi_A$ and $\phi_B$.
-	
+	The public parameters in this protocol are $e_A,e_B$, $p$, $E$, $E/A$, $E/B$,$P_A,Q_A,P_B,Q_B, \phi_A(P_B)$, $\phi_A(Q_B)$, $\phi_B(P_A)$ and $\phi_B(Q_A)$. Secret parameters entail $m_A,n_A$, $m_B,n_B$, $\phi_A$ and $\phi_B$.\\
+
+The above key-exchange protocol can be adapted in the following way to yield a public-key cryptosystem: 
+\begin{enumerate}[(1)]
+	\item As (1) above.
+	\item Let $\mathcal{H}= \{H_k:k\in K\}$ be a hash function family indexed by a finite set K, where each $H_k$ is a function from $\mathcal{F}_q$ to the message space $\{0,1\}^w$. Choose \textit{secret parameters} $m_A,n_A$, then compute $E/A$, $\phi_A(P_B)$ and $\phi_A(Q_B)$ as above. The \textbf{public key} is ($E/A$, $\phi_A(P_B)$, $\phi_A(Q_B)$, $k\in_R K$) and the \textbf{private key} is ($m_A,n_A,k$).
+	\item \textbf{Encryption}: Given a public key ($E/A$, $\phi_A(P_B)$, $\phi_A(Q_B)$, $k\in_R K$) choose two random elements $m_B,n_B$. Then compute $h=H_k(j(E/AB))$ and $c=h\oplus m$. The ciphertext is ($E/B$, $\phi_B(P_A)$, $\phi_B(Q_A)$, $c$).
+	\item \textbf{Decryption}: Given a ciphertext ($E/B$, $\phi_B(P_A)$, $\phi_B(Q_A)$, $c$) and a private key ($m_A,n_A,k$) compute the j-invariant $j(E/AB)$ and then $h = H_k(j(E/AB))$, $m=c\oplus h$.
+\end{enumerate}
+
 	
 \subsection{Security}
 It is easy to see that the protocol could be broken, if an attacker would be able to solve either of the following problems:
@@ -24,7 +32,10 @@ It is easy to see that the protocol could be broken, if an attacker would be abl
 		\item Find the j-invariant of E/AB given E/A, E/B and $\phi_A(P_B)$, $\phi_A(Q_B),\phi_B(P_A)$, $\phi_B(Q_A)$ ("Supersingular Decision Diffie-Hellman problem")
 	\end{itemize}
 
-So far, there are no known subexponential algorithms for solving any of these problems. The best known attack against SIKE is the "claw algorithm" with space and time requirement in $\mathcal{O}(p^{1/4})$ on a classical computer and $\mathcal{O}(p^{1/6})$ quantumly. Given $E$ and $E/A$, the attacker starts by computing and storing all $2^{e_A/2}$-degree isogenies of $E$ in a lookup-table with the resulting curve $E^{\prime}$. In a following step he then starts computing $2^{e_A/2}$-degree isogenies $E/A^{\prime}$ of $E/A$ and searches for a collision $E/A^{\prime} \cong E^{\prime}$ in the lookup table, which can be used to calculate $\phi:E \to E/A$ as a composition of the colliding $2^{e_A/2}$-isogenies.
+So far, there are no known subexponential algorithms for solving any of these problems. The best known attack against SIKE is the "claw algorithm" with space and time requirement in $\mathcal{O}(p^{1/4})$ on a classical computer and $\mathcal{O}(p^{1/6})$ quantumly. Given $E$ and $E/A$, the attacker starts by computing and storing all $2^{e_A/2}$-degree isogenies of $E$ in a lookup-table with the resulting curve $E^{\prime}$. In a following step he then starts computing $2^{e_A/2}$-degree isogenies $E/A^{\prime}$ of $E/A$ and searches for a collision $E/A^{\prime} \cong E^{\prime}$ in the lookup table, which can be used to calculate $\phi:E \to E/A$ as a composition of the colliding $2^{e_A/2}$-isogenies.\\
+
+IND-CPA % EL Gamal
+IND-CCA % KEM
 
 
 \subsection{Correctness}
@@ -47,7 +58,7 @@ In the following we will prove that $\phi_B^{\prime}$ and $\phi_A^{\prime}$ have
 
 
 \subsection{Computational Details}
-%TODO: Why is it easy to compute isogenies?
+
 
 Given $E$ and a generator $R$ of $E[2^{e_A}]$, computing an isogeny $\phi:E \to E/A$ with $ker(\langle R \rangle)$  can be done in $\mathcal{O}(2^{e_A})$ using Velu's formula. %TODO: citation
 Since $2^{e_A} \in \mathcal{O}(\sqrt{p})$, computing isogenies this way would render the cryptosystem impractical.\\
