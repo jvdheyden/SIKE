@@ -449,18 +449,18 @@ At this stage, it is not suitable for use in embedded devices or microcontroller
 %% side channel & error attacks?
 %% galbraith: security of all schemes of this type depends on the difficulty of computing the endomorphism ring of a supersingular elliptic curve
 %%why supersingular: because of endomorphism ring
-%\begin{frame}{Security assumptions} %Mündlich: Es wird angenommen, dass diese Probleme schwer sind.
-%\begin{enumerate}[1.]
-%	\item \textbf{Computational Supersingular Isogeny problem:}\\
-%	Let $\phi_A:E\to E/A$ be an isogeny with $ker(\phi_A)=\langle [m_A]P_A+[n_A]Q_A\rangle$. Given $E/A$ and the values $\phi_A(P_B),\phi_A(Q_B)$ find a generator $R_A$ of $\langle [m_A]P_A+[n_A]Q_A\rangle$\pause
-%	\vspace{5mm}
-%	\item \textbf{Computational Supersingular Diffie-Hellman problem:}\\ 
-%	Let $\phi_A:E\to E/A$ be an isogeny with $ker(\phi_A)=\langle [m_A]P_A+[n_A]Q_A\rangle$ and let $\phi_B:E\to E/A$ be an isogeny with $ker(\phi_B)=\langle [m_B]P_B+[n_B]Q_B\rangle$
-%	Given $E/A,E/B$ and the points $\phi_A(P_B),\phi_A(Q_B),\phi_B(P_A),\phi_B(Q_A)$ find the j-invariant of $E/\langle [m_A]P_A+[n_A]Q_A,[m_B]P_B+[n_B]Q_B \rangle$\pause
-%	\vfill
-%	It is being assumed that both problems are hard. There is no reduction to an NP-complete problem.
-%\end{enumerate}
-%\end{frame}
+\begin{frame}{Security assumptions} %Mündlich: Es wird angenommen, dass diese Probleme schwer sind.
+\begin{enumerate}[1.]
+	\item \textbf{Computational Supersingular Isogeny problem:}\\
+	Let $\phi_A:E\to E/A$ be an isogeny with $ker(\phi_A)=\langle [m_A]P_A+[n_A]Q_A\rangle$. Given $E/A$ and the values $\phi_A(P_B),\phi_A(Q_B)$ find a generator $R_A$ of $\langle [m_A]P_A+[n_A]Q_A\rangle$\pause
+	\vspace{5mm}
+	\item \textbf{Computational Supersingular Diffie-Hellman problem:}\\ 
+	Let $\phi_A:E\to E/A$ be an isogeny with $ker(\phi_A)=\langle [m_A]P_A+[n_A]Q_A\rangle$ and let $\phi_B:E\to E/A$ be an isogeny with $ker(\phi_B)=\langle [m_B]P_B+[n_B]Q_B\rangle$
+	Given $E/A,E/B$ and the points $\phi_A(P_B),\phi_A(Q_B),\phi_B(P_A),\phi_B(Q_A)$ find the j-invariant of $E/\langle [m_A]P_A+[n_A]Q_A,[m_B]P_B+[n_B]Q_B \rangle$\pause
+	\vfill
+	It is being assumed that both problems are hard. There is no reduction to an NP-complete problem.
+\end{enumerate}
+\end{frame}
 
 \begin{frame}{Known attacks: claw algorithm}
 The best known attack against SIKE is the "claw algorithm":
