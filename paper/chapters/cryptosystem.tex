@@ -1,6 +1,7 @@
 % !TeX root = ../thesis.tex
 \section{Cryptosystem}
 \subsection{The Supersingular Isogeny Diffie-Hellman protocol}
+\label{ch:sidh}
 
 The idea of the SIKE cryptosystem is to establish a Diffie-Hellman key-exchange protocol based on isogenies between supersingular elliptic curves. 
 
@@ -24,7 +25,7 @@ The above key-exchange protocol can be adapted in the following way to yield a p
 
 	
 \subsection{Security}
-It is easy to see that the protocol could be broken, if an attacker would be able to solve either of the following problems:
+It is easy to see that the above protocols could be broken, if an attacker would be able to solve either of the following problems:
 	
 	\begin{itemize}[\textbullet]
 		\item Compute $\phi_A$ given $E$ and $E/A$ ("Decisional Supersingular Isogeny problem")
@@ -34,9 +35,31 @@ It is easy to see that the protocol could be broken, if an attacker would be abl
 
 So far, there are no known subexponential algorithms for solving any of these problems. The best known attack against SIKE is the "claw algorithm" with space and time requirement in $\mathcal{O}(p^{1/4})$ on a classical computer and $\mathcal{O}(p^{1/6})$ quantumly. Given $E$ and $E/A$, the attacker starts by computing and storing all $2^{e_A/2}$-degree isogenies of $E$ in a lookup-table with the resulting curve $E^{\prime}$. In a following step he then starts computing $2^{e_A/2}$-degree isogenies $E/A^{\prime}$ of $E/A$ and searches for a collision $E/A^{\prime} \cong E^{\prime}$ in the lookup table, which can be used to calculate $\phi:E \to E/A$ as a composition of the colliding $2^{e_A/2}$-isogenies.\\
 
-IND-CPA % EL Gamal
-IND-CCA % KEM
+The public-key cryptosystem presented above is \textit{IND-CPA-secure}. The proof is very similar to the one for El Gamal since it is essentially El Gamal transposed into the setting of supersingular isogenies. SIKE also provides \textit{IND-CCA} security by transforming the above protocol into a key encapsulation mechanism that works as follows:
 
+\begin{enumerate}[(1)]
+	\item \textbf{Setup}: As in \ref{ch:sidh} but we additionally define three hash functions F,G,H, the public key $pk_B=(E/B,\phi_B(P_A),\phi_B(Q_A))$ and Bob's secret key $\beta$.
+	\item \textbf{Encapsulation algorithm}: 
+	\begin{enumerate}[(i)]
+		\item Choose a random string $m\in\{0,1\}^n$ and compute $r=G(m,pk_B)$ where $G$ is a hash function and $0\leq r < 2^{e_A}$.
+		\item Compute $\phi_A:E \to E/A$ s.t. $ker(\phi_A) = \langle P_A + [r]Q_A \rangle$.
+		\item Compute $\phi^{\prime}_A: E/B \to E/AB$ s.t. $ker(\phi^{\prime}_A) = \langle \phi_B(P_A) + \phi_B([r]Q_A) \rangle$.
+		\item Compute $c_1=F(j(E/AB))\oplus m$ where F is a hash function to $\{0,1\}^n$.
+		\item Output the ciphertext $c=(E/A,\phi_A(P_B),\phi_A(Q_B),c_1)$.
+		\item Output the key $K=H(m,c)$
+	\end{enumerate}
+	\item \textbf{Encapsulation algorithm}: 
+	\begin{enumerate}[(i)]
+		\item Input: $c=(E/A,\phi_A(P_B),\phi_A(Q_B),c_1)$
+		\item Compute $\phi^{\prime}_B: E/A \to E/BA$ s.t. $ker(\phi^{\prime}_B) = \langle \phi_A(P_B) + \phi_A([\beta]Q_B) \rangle$.
+		\item Compute $m^{\prime}=F(j(E/BA))\oplus c_1$.
+		\item Compute $r^{\prime}=G(m^{\prime},pk_B)$.
+		\item Compute $\phi_{A^{\prime}}:E \to E/A^{\prime}$ s.t. $ker(\phi_A) = \langle P_A + [r^{\prime}]Q_A \rangle$.
+		\item If $j(E/A^{\prime})=j(E/A)$ and $\phi_{A^{\prime}}(P_B) = \phi_{A}(P_B)$ and $\phi_{A^{\prime}}(Q_B) = \phi_{A}(Q_B)$ then output $K=H(m^{\prime},c)$; otherwise choose random $s\in\{0,1\}^n$ and output $H(s,c)$.
+
+	\end{enumerate}
+	
+\end{enumerate}
 
 \subsection{Correctness}
 \label{ch:correctness}
