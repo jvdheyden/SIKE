@@ -48,7 +48,7 @@ The public-key cryptosystem presented above is \textit{IND-CPA-secure}. The proo
 		\item Output the ciphertext $c=(E/A,\phi_A(P_B),\phi_A(Q_B),c_1)$.
 		\item Output the key $K=H(m,c)$
 	\end{enumerate}
-	\item \textbf{Encapsulation algorithm}: 
+	\item \textbf{Decapsulation algorithm}: 
 	\begin{enumerate}[(i)]
 		\item Input: $c=(E/A,\phi_A(P_B),\phi_A(Q_B),c_1)$
 		\item Compute $\phi^{\prime}_B: E/A \to E/BA$ s.t. $ker(\phi^{\prime}_B) = \langle \phi_A(P_B) + \phi_A([\beta]Q_B) \rangle$.
@@ -87,3 +87,5 @@ Given $E$ and a generator $R$ of $E[2^{e_A}]$, computing an isogeny $\phi:E \to 
 Since $2^{e_A} \in \mathcal{O}(\sqrt{p})$, computing isogenies this way would render the cryptosystem impractical.\\
 	
 The solution to this problem is to compute an isogeny of large degree as a composition of isogenies of small degree. Then $\phi = \phi_1 \circ \dots \circ \phi_k \circ [n]$ where $\phi_1 \circ \dots \circ \phi_k$ are isogenies of prime degree that are defined over $\mathbb{F}_q$ and $deg(\phi) = n^2 \prod^k_{i=1} deg(\phi_i)$. While computing the composition of $t$ isogenies of degree $t$ takes time proportional to $t$, the cost of computing the composition in a single step is in $\mathcal{O}(2^t)$. Since isogenous elliptic curves have the same cardinality, we can use this composition method in every step of the protocol.
+
+%TODO: What about computing the parameters of the protocol?
