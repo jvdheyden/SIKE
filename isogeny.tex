@@ -196,49 +196,49 @@ What is an elliptic curve?
 
 \end{frame}
 
-%\begin{frame}{Elliptic Curve Point Addition}
-%
-%\begin{itemize}[\textbullet]
-%	\item Find the line intersecting E at P and Q\pause
-%	\item If $P=Q$, find tangent of E with the same gradient like E at point P\pause
-%	\item Plug line equation into E and solve to find the  point $R$ of intersection\pause
-%	\item Flip y-coordinate to get $R^{\prime}$\pause
-%\end{itemize}
-%
-%\end{frame}
+\begin{frame}{Elliptic Curve Point Addition}
+
+\begin{itemize}[\textbullet]
+	\item Find the line intersecting E at P and Q\pause
+	\item If $P=Q$, find tangent of E with the same gradient like E at point P\pause
+	\item Plug line equation into E and solve to find the  point $R$ of intersection\pause
+	\item Flip y-coordinate to get $R^{\prime}$\pause
+\end{itemize}
+
+\end{frame}
 
 %
-%\begin{frame}{Elliptic Curve addition algorithm}
-%	Let $E : Y^2 = X^3 + AX + B$ be an elliptic curve and let $P_1$ and $P_2$ be points on E.
-%	\begin{enumerate}[1.]
-%		\item If $P_1 = \mathcal{O}$, then $P_1 + P_2 = P_2$\pause
-%		\item Otherwise, if $P_2=\mathcal{O}$, then $P_1 + P_2 = P_1$\pause
-%		\item Otherwise, write $P_1 = (x_1,y_1)$ and $P_1 = (x_2,y_2)$\pause
-%		\item If $x_1 = x_2$ and $y_1=-y_2$, then $P_1+P_2=\mathcal{O}$\pause
-%		\item Otherwise, define \\
-%		\qquad \qquad \qquad$\lambda =
-%		\begin{cases}
-%			\frac{y_2-y_1}{x_2-x_1}\text{\quad if }P_1 \neq P_2\\\pause
-%			\\
-%			\frac{3x_1^2 +A}{2y_1}\text{\quad if }P_1=P_2 
-%		\end{cases}$\\\pause
-%		\vspace{5mm}
-%		and let $x_3=\lambda^2-x_1-x_2$  \hfill and $y_3=\lambda(x_1-x_3)-y_1$.\\
-%		\vfill
-%		Then $P_1+P_2=(x_3,y_3)$.
-%	\end{enumerate}
-%\end{frame}
+\begin{frame}{Elliptic Curve addition algorithm}
+	Let $E : Y^2 = X^3 + AX + B$ be an elliptic curve and let $P_1$ and $P_2$ be points on E.
+	\begin{enumerate}[1.]
+		\item If $P_1 = \mathcal{O}$, then $P_1 + P_2 = P_2$\pause
+		\item Otherwise, if $P_2=\mathcal{O}$, then $P_1 + P_2 = P_1$\pause
+		\item Otherwise, write $P_1 = (x_1,y_1)$ and $P_1 = (x_2,y_2)$\pause
+		\item If $x_1 = x_2$ and $y_1=-y_2$, then $P_1+P_2=\mathcal{O}$\pause
+		\item Otherwise, define \\
+		\qquad \qquad \qquad$\lambda =
+		\begin{cases}
+			\frac{y_2-y_1}{x_2-x_1}\text{\quad if }P_1 \neq P_2\\\pause
+			\\
+			\frac{3x_1^2 +A}{2y_1}\text{\quad if }P_1=P_2 
+		\end{cases}$\\\pause
+		\vspace{5mm}
+		and let $x_3=\lambda^2-x_1-x_2$  \hfill and $y_3=\lambda(x_1-x_3)-y_1$.\\
+		\vfill
+		Then $P_1+P_2=(x_3,y_3)$.
+	\end{enumerate}
+\end{frame}
 
 
 
 
 
-%\begin{frame}{Why use supersingular curves}
-%\begin{itemize}[\textbullet]
-%	\item We can easily control their group structure which is required for efficient computation of isogenies
-%	\item Their endomorphism ring is not commutative which  prevents some quantum attacks
-%\end{itemize}
-%\end{frame}
+\begin{frame}{Why use supersingular curves}
+\begin{itemize}[\textbullet]
+	\item We can easily control their group structure which is required for efficient computation of isogenies
+	\item Their endomorphism ring is not commutative which  prevents some quantum attacks
+\end{itemize}
+\end{frame}
 
 %\begin{frame}{ECDLP}
 %\end{frame}
@@ -246,31 +246,31 @@ What is an elliptic curve?
 
 
 \subsection{Isogenies}
-%\begin{frame}{Group homomorphisms}
-%Properties of group homomorphisms:
-%\begin{itemize}[\textbullet]
-%	\item Given 2 groups (G,+), (H,$\oplus$) a group homomorphism is a function $\phi: G \to H$ such that $\phi(u + v) = \phi(u) \oplus \phi(v)$ \pause
-%	\item $\phi(e_G) = e_H$ where $e_G$ and $e_H$ are the identity elements of G and H\pause
-%	\item The kernel of $\phi$ is the set of elements in $G$ which are mapped to the identity in $H$:
-%	$ker(\phi) \equiv \{u\in G:\phi(u)=e_H\}$
-%\end{itemize}
+\begin{frame}{Group homomorphisms}
+Properties of group homomorphisms:
+\begin{itemize}[\textbullet]
+	\item Given 2 groups (G,+), (H,$\oplus$) a group homomorphism is a function $\phi: G \to H$ such that $\phi(u + v) = \phi(u) \oplus \phi(v)$ \pause
+	\item $\phi(e_G) = e_H$ where $e_G$ and $e_H$ are the identity elements of G and H\pause
+	\item The kernel of $\phi$ is the set of elements in $G$ which are mapped to the identity in $H$:
+	$ker(\phi) \equiv \{u\in G:\phi(u)=e_H\}$
+\end{itemize}
 %	 
 %	
 %	%TODO: Schaubild an Tafel
-%	\begin{block}{Example}
-%		$\phi: \mathbb{Z}\to\mathbb{Z}/3\mathbb{Z}$ is surjective and it's kernel consists of all elements in $\mathbb{Z}$ divisible by 3
-%		
-%		
-%	\end{block}
-%\end{frame}
-%\begin{frame}{Types of Homorphisms}
-%	\begin{itemize}[\textbullet]
-%		\item Isomorphism: A group homomorphism that is bijective \pause
-%		\item Endomorphism: A group homomorphism $\phi: G \to G$\pause
-%		\item Isogeny: A group homomorphism $\phi : G \to H$ with a finite kernel
-%	\end{itemize}
-%
-%\end{frame}
+	\begin{block}{Example}
+		$\phi: \mathbb{Z}\to\mathbb{Z}/3\mathbb{Z}$ is surjective and it's kernel consists of all elements in $\mathbb{Z}$ divisible by 3
+		
+		
+	\end{block}
+\end{frame}
+\begin{frame}{Types of Homorphisms}
+	\begin{itemize}[\textbullet]
+		\item Isomorphism: A group homomorphism that is bijective \pause
+		\item Endomorphism: A group homomorphism $\phi: G \to G$\pause
+		\item Isogeny: A group homomorphism $\phi : G \to H$ with a finite kernel
+	\end{itemize}
+
+\end{frame}
 \begin{frame}{Endomorphism example}
 \begin{itemize}[\textbullet]
 	\item A point $P\in E$ satisfying $[m]P=\mathcal{O}$ is called a point of order m in the group E\pause
@@ -363,62 +363,62 @@ Idea: Create Diffie-Hellman exchange over isogenies of supersingular elliptic cu
 \end{enumerate}
 \end{frame}
 
-%\begin{frame}{The SIDH protocol: Correctness}
-%\textbf{Question:} Why is $ker(\phi_B^{\prime})=ker(\phi_A^{\prime})$?\pause\\
-%\vspace{5mm}
-%\textbf{Lemma 1:} Let $\phi_1: G_1 \to G_2$ and $\phi_2: G_2 \to G_3$ be group homomorphisms with $ker(\phi_1) = \langle K_1 \rangle$ and $ker(\phi_2) = \phi_1(\langle K_2 \rangle)$. Then for $\phi:G_1 \to G_3$ defined by $\phi=\phi_2 \circ \phi_1$ we have $ker(\phi) =\langle K_1,K_2\rangle$.\pause\\ %beweis an Tafel
-%\vspace{5mm}
-%
-%\textbf{Theorem 2:} $ker(\phi_B^{\prime} \circ \phi_A) = ker(\phi_A^{\prime} \circ \phi_B)$\\
-%\textbf{Proof:}
-%	\begin{enumerate}[(i)]
-%		\item $ker(\phi_B^{\prime})=\phi_A(\langle [m_B]P_B + [n_B]Q_B)\rangle)$\pause
-%		\item $ker(\phi_A)=\langle [m_A]P_A + [n_A]Q_A\rangle$\pause
-%		\item $ker(\phi_B^{\prime} \circ \phi_A) \stackrel{\text{Lemma 1}}{=} \langle [m_A]P_A + [n_A]Q_A, [m_B]P_B + [n_B]Q_B \rangle$\pause
-%		\item The application of Lemma 1 on $\phi_A^{\prime} \circ \phi_B$ yields the same kernel
-%	\end{enumerate}
-%
-%\vfill
-%
-%Since isogenies are uniquely defined by their kernel, $E/AB \simeq E/BA$.
-%
-%\end{frame}
+\begin{frame}{The SIDH protocol: Correctness}
+\textbf{Question:} Why is $ker(\phi_B^{\prime})=ker(\phi_A^{\prime})$?\pause\\
+\vspace{5mm}
+\textbf{Lemma 1:} Let $\phi_1: G_1 \to G_2$ and $\phi_2: G_2 \to G_3$ be group homomorphisms with $ker(\phi_1) = \langle K_1 \rangle$ and $ker(\phi_2) = \phi_1(\langle K_2 \rangle)$. Then for $\phi:G_1 \to G_3$ defined by $\phi=\phi_2 \circ \phi_1$ we have $ker(\phi) =\langle K_1,K_2\rangle$.\pause\\ %beweis an Tafel
+\vspace{5mm}
 
-%\begin{frame}{The SIDH protocol: Visualization} %besser an due Tafel malen!
-%\begin{figure}
-%	\centering
-%	\includegraphics[width=0.7\linewidth]{SIDH_big}
-%	\caption{SIDH}
-%	\label{fig:sidh_big}
-%\end{figure}
-%\end{frame}
+\textbf{Theorem 2:} $ker(\phi_B^{\prime} \circ \phi_A) = ker(\phi_A^{\prime} \circ \phi_B)$\\
+\textbf{Proof:}
+	\begin{enumerate}[(i)]
+		\item $ker(\phi_B^{\prime})=\phi_A(\langle [m_B]P_B + [n_B]Q_B)\rangle)$\pause
+		\item $ker(\phi_A)=\langle [m_A]P_A + [n_A]Q_A\rangle$\pause
+		\item $ker(\phi_B^{\prime} \circ \phi_A) \stackrel{\text{Lemma 1}}{=} \langle [m_A]P_A + [n_A]Q_A, [m_B]P_B + [n_B]Q_B \rangle$\pause
+		\item The application of Lemma 1 on $\phi_A^{\prime} \circ \phi_B$ yields the same kernel
+	\end{enumerate}
+
+\vfill
+
+Since isogenies are uniquely defined by their kernel, $E/AB \simeq E/BA$.
+
+\end{frame}
+
+\begin{frame}{The SIDH protocol: Visualization} %besser an due Tafel malen!
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{SIDH_big}
+	\caption{SIDH}
+	\label{fig:sidh_big}
+\end{figure}
+\end{frame}
 
 
 
 \subsection{Computation Details and Efficiency}
 
-%\begin{frame}{Efficiently computing isogenies}
-%
-%
-%	\textbf{Problem:} Computing $\phi_G : E \to E/A$ from $E$ and $A$ takes time polynomial in $\#A$. Since $2^{e_A} \in \mathcal{O}(\sqrt{p})$, this is not acceptable.\pause\\
-%	\vfill
-%	\textbf{Solution:} Compute isogeny of large degree as a composition of isogenies of small degree. Then $\phi = \phi_1 \circ \dots \circ \phi_k \circ [n]$ where $\phi_1 \circ \dots \circ \phi_k$ are isogenies of prime degree that are defined over $\mathbb{F}_q$ and $deg(\phi) = n^2 \prod^k_{i=1} deg(\phi_i)$.\\
-%	 While computing the composition of $t$ isogenies of degree $t$ takes time proportional to $t$, the cost of computing the composition in a single step is in $\mathcal{O}(2^t)$\\
-%	 
-%	%TODO: Grund für supersingular curves: rational torsion points that makes efficient computation possible	
-%
-%\end{frame}
-%\begin{frame}{The SIKE protocol}
-%
-%How does the SIKE specification for NIST PQ competition differ from SIDH?
-%
-%\begin{itemize}[\textbullet]
-%	%	\item SIKE is a key encapsulation scheme that uses the SIDH protocol to generate a shared key between 2 parties % TODO: vielleicht key encapsulation kurz zeigen
-%	\item SIKE is IND-CPA-secure and IND-CCA-secure %TODO: noch herausfinden warum
-%	\item SIKE uses compression to reduce key sizes and computes private keys in constant time to defend against side-channel attacks
-%\end{itemize}
-%
-%\end{frame}
+\begin{frame}{Efficiently computing isogenies}
+
+
+	\textbf{Problem:} Computing $\phi_G : E \to E/A$ from $E$ and $A$ takes time polynomial in $\#A$. Since $2^{e_A} \in \mathcal{O}(\sqrt{p})$, this is not acceptable.\pause\\
+	\vfill
+	\textbf{Solution:} Compute isogeny of large degree as a composition of isogenies of small degree. Then $\phi = \phi_1 \circ \dots \circ \phi_k \circ [n]$ where $\phi_1 \circ \dots \circ \phi_k$ are isogenies of prime degree that are defined over $\mathbb{F}_q$ and $deg(\phi) = n^2 \prod^k_{i=1} deg(\phi_i)$.\\
+	 While computing the composition of $t$ isogenies of degree $t$ takes time proportional to $t$, the cost of computing the composition in a single step is in $\mathcal{O}(2^t)$\\
+	 
+	%TODO: Grund für supersingular curves: rational torsion points that makes efficient computation possible	
+
+\end{frame}
+\begin{frame}{The SIKE protocol}
+
+How does the SIKE specification for NIST PQ competition differ from SIDH?
+
+\begin{itemize}[\textbullet]
+	%	\item SIKE is a key encapsulation scheme that uses the SIDH protocol to generate a shared key between 2 parties % TODO: vielleicht key encapsulation kurz zeigen
+	\item SIKE is IND-CPA-secure and IND-CCA-secure %TODO: noch herausfinden warum
+	\item SIKE uses compression to reduce key sizes and computes private keys in constant time to defend against side-channel attacks
+\end{itemize}
+
+\end{frame}
 \section{Areas of use}
 
 \begin{frame}{Areas of use}
@@ -472,35 +472,35 @@ The best known attack against SIKE is the "claw algorithm":
 	\item Overall space and time requirement is in $\mathcal{O}(p^{1/4})$ on a classical computer and $\mathcal{O}(p^{1/6})$ quantumly
 \end{enumerate}
 \end{frame}
-%\begin{frame}{Known attacks: endomorphism ring}
+\begin{frame}{Known attacks: endomorphism ring}
 
 
-%\begin{itemize}[\textbullet]
-%	\item The endomorphism ring of E is the set of isogenies from E to itself: $End(E) = \{\phi:E\to E\} \cup \{0\}$\pause
-%	\item Addition of isogenies is defined using elliptic curve addition as $(\phi_1+\phi_2)(P) =  \phi_1(P) + \phi_2(P)$\pause
-%	\item Multiplication is the composition $\phi_1 \circ \phi_2$\pause
-%	\item Given $E$ and $End(E)$, computing $\phi: E \to E'$ can be reduced to computing $End(E')$. This is shown to be possible in subexponential time on quantum computers, if E is ordinary\pause
-%	\item Unlike ordinary curves, the endomorphism ring of supersingular curves is non-commutative and is therefore not susceptible to the quantum attack
-%\end{itemize}
-%
-%
-%
-%\end{frame}
+\begin{itemize}[\textbullet]
+	\item The endomorphism ring of E is the set of isogenies from E to itself: $End(E) = \{\phi:E\to E\} \cup \{0\}$\pause
+	\item Addition of isogenies is defined using elliptic curve addition as $(\phi_1+\phi_2)(P) =  \phi_1(P) + \phi_2(P)$\pause
+	\item Multiplication is the composition $\phi_1 \circ \phi_2$\pause
+	\item Given $E$ and $End(E)$, computing $\phi: E \to E'$ can be reduced to computing $End(E')$. This is shown to be possible in subexponential time on quantum computers, if E is ordinary\pause
+	\item Unlike ordinary curves, the endomorphism ring of supersingular curves is non-commutative and is therefore not susceptible to the quantum attack
+\end{itemize}
 
-%\begin{frame}{Resistance against side-channel and fault attacks}
-%Attack vectors for timing, power and fault analysis:
-%\begin{itemize}[\textbullet]
-%	\item Computation of the hidden kernel point
-%	\item Computation of the secret isogeny
-%\end{itemize}
-%
-%\vfill
-%
-%As a countermeasure all secret values are being computed using constant-time-functions. However, this does not defend against fault injection attacks.
-%
-%
-%\end{frame}
-%
+
+
+\end{frame}
+
+\begin{frame}{Resistance against side-channel and fault attacks}
+Attack vectors for timing, power and fault analysis:
+\begin{itemize}[\textbullet]
+	\item Computation of the hidden kernel point
+	\item Computation of the secret isogeny
+\end{itemize}
+
+\vfill
+
+As a countermeasure all secret values are being computed using constant-time-functions. However, this does not defend against fault injection attacks.
+
+
+\end{frame}
+
 \begin{frame}{Passive and active security}
 
 SIKE is IND-CPA and IND-CCA secure.
